@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_preview">这句话后来演变成“饮水思源”这个成语，意为喝水的时候想一想流水的源头，比喻不忘本。</string>
+    <string name="input_hint_for_preview">输入一些你想看到的文字。</string>
+    <string name="text_size">字号</string>
+</resources>
