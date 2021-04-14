@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:valueFrom="0"
             android:valueTo="1000"
-            android:value="420"
+            android:value="400"
             android:stepSize="1"
             app:tickVisible="false" />
 
@@ -38,8 +38,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/default_preview"
-            android:textSize="30sp"
-            android:fontVariationSettings="'wght' 420" />
+            android:textSize="20sp"
+            android:fontVariationSettings="'wght' 400" />
 
     </LinearLayout>
 </ScrollView>
