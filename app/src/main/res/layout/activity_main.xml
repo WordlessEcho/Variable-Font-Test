@@ -22,6 +22,13 @@
             android:inputType="number"
             android:hint="@string/text_size" />
 
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/chws"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/enable_chws"
+            android:checked="true" />
+
         <com.google.android.material.slider.Slider
             android:id="@+id/wght"
             android:paddingHorizontal="10dp"
@@ -39,6 +46,7 @@
             android:layout_height="wrap_content"
             android:text="@string/default_preview"
             android:textSize="20sp"
+            android:fontFeatureSettings="'chws' 1"
             android:fontVariationSettings="'wght' 400" />
 
     </LinearLayout>

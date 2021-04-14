@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         val previewContent = findViewById<EditText>(R.id.previewContent)
         val textSize = findViewById<EditText>(R.id.textSize)
+        val chws = findViewById<SwitchCompat>(R.id.chws)
         val wght = findViewById<Slider>(R.id.wght)
         val preview = findViewById<TextView>(R.id.preview)
 
@@ -29,6 +30,10 @@ class MainActivity : AppCompatActivity() {
 
         wght.addOnChangeListener { _, value, _ ->
             preview.fontVariationSettings = "'wght' $value"
+        }
+
+        chws.setOnCheckedChangeListener { buttonView, isChecked ->
+            preview.fontFeatureSettings = if (isChecked) "'chws' 1" else ""
         }
     }
 }

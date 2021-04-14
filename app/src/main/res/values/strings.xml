@@ -3,4 +3,5 @@
     <string name="default_preview">This sentence becomes to the idiom of "when you drink water, think of its source", which means don’t just be thankful for the water: be thankful for all the elements and processes (both past and present) that allowed you to enjoy that humble cup of water.</string>
     <string name="input_hint_for_preview">Input some words you want to see.</string>
     <string name="text_size">Text size</string>
+    <string name="enable_chws">Enable Contextual Half-width Spacing</string>
 </resources>
