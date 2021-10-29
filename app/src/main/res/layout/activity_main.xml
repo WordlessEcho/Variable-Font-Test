@@ -22,6 +22,11 @@
             android:inputType="number"
             android:hint="@string/text_size" />
 
+        <Spinner
+            android:id="@+id/fontFamilies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/chws"
             android:layout_width="match_parent"
