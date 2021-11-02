@@ -49,7 +49,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="字号" />
+                android:text="@string/text_size"
+                android:textAppearance="?attr/textAppearanceSubtitle1" />
 
             <EditText
                 android:id="@+id/textSize"
@@ -68,7 +69,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="字族" />
+                android:text="@string/font_family"
+                android:textAppearance="?attr/textAppearanceSubtitle1" />
 
             <Spinner
                 android:id="@+id/fontFamilies"
@@ -85,7 +87,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="字重" />
+                android:text="@string/font_weight"
+                android:textAppearance="?attr/textAppearanceSubtitle1" />
 
             <com.google.android.material.slider.Slider
                 android:id="@+id/wght"
