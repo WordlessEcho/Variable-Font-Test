@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.widget.addTextChangedListener
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.slider.Slider
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
@@ -22,26 +23,35 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         setContentView(R.layout.activity_main)
 
         val previewContent: EditText = findViewById(R.id.previewContent)
+        val showOptions: ImageButton = findViewById(R.id.showOptions)
+        val options: View = findViewById(R.id.options)
         val textSize: EditText = findViewById(R.id.textSize)
         val chws: SwitchCompat = findViewById(R.id.chws)
         val wght: Slider = findViewById(R.id.wght)
-        val preview: TextView = findViewById(R.id.preview)
         val fontFamilies: Spinner = findViewById(R.id.fontFamilies)
 
-        previewContent.addTextChangedListener { text ->
-            preview.text = text
+        showOptions.setOnClickListener {
+            options.apply {
+                visibility = if (visibility == View.GONE) {
+                    showOptions.setImageResource(R.drawable.ic_baseline_expand_less_24)
+                    View.VISIBLE
+                } else {
+                    showOptions.setImageResource(R.drawable.ic_baseline_expand_more_24)
+                    View.GONE
+                }
+            }
         }
 
         textSize.addTextChangedListener { text ->
-            preview.textSize = if (text.toString().isEmpty()) 20.toFloat() else text.toString().toFloat()
+            previewContent.textSize = if (text.toString().isEmpty()) 20.toFloat() else text.toString().toFloat()
         }
 
         wght.addOnChangeListener { _, value, _ ->
-            preview.fontVariationSettings = "'wght' $value"
+            previewContent.fontVariationSettings = "'wght' $value"
         }
 
         chws.setOnCheckedChangeListener { buttonView, isChecked ->
-            preview.fontFeatureSettings = if (isChecked) "'chws' 1" else ""
+            previewContent.fontFeatureSettings = if (isChecked) "'chws' 1" else ""
         }
 
         ArrayAdapter.createFromResource(
@@ -57,8 +67,8 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
-        val preview: TextView = findViewById(R.id.preview)
-        preview.typeface = fontFamilyList[pos]
+        val previewContent: TextView = findViewById(R.id.previewContent)
+        previewContent.typeface = fontFamilyList[pos]
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {

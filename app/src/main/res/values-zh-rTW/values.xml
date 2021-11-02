@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="default_preview">這句話後來演變成「飲水思源」這個成語，意為喝水的時候想一想流水的源頭，比喻不忘本。</string>
+    <string name="default_preview">（Click here to input any text you want to see.）這句話後來演變成「飲水思源」這個成語，意為喝水的時候想一想流水的源頭，比喻不忘本。</string>
     <string name="font_family_default">預設</string>
     <string name="default_bold">粗體預設</string>
     <string name="monospaced">固定寬度</string>
