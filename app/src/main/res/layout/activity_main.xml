@@ -18,6 +18,7 @@
             android:background="@android:color/transparent"
             android:inputType="textMultiLine"
             android:textSize="20sp"
+            android:importantForAutofill="no"
             android:hint="@string/input_hint_for_preview"
             android:text="@string/default_preview"
             android:fontVariationSettings="'wght' 400"
@@ -30,7 +31,8 @@
             android:layout_alignParentEnd="true"
             android:layout_below="@id/previewContent"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_baseline_expand_more_24" />
+            android:src="@drawable/ic_baseline_expand_more_24"
+            android:contentDescription="@string/expand_options" />
     </RelativeLayout>
 
     <LinearLayout
