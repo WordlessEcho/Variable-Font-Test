@@ -35,7 +35,7 @@
         <SwitchPreferenceCompat
             android:key="ital"
             android:title="@string/variation_italic"
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:persistent="false" />
 
         <EditTextPreference
