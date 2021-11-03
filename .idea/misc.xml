@@ -4,7 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/files/src/Variable-Font-Test/app/src/main/res/drawable/toggle_options.xml" value="0.21822916666666667" />
+        <entry key="..\:/files/src/Variable-Font-Test/app/src/main/res/layout/custom_seekbar_pref.xml" value="0.18541666666666667" />
         <entry key="..\:/files/src/Variable-Font-Test/app/src/main/res/layout/font_preview.xml" value="0.3496376811594203" />
+        <entry key="..\:/files/src/Variable-Font-Test/app/src/main/res/layout/options.xml" value="0.23822463768115942" />
+        <entry key="..\:/files/src/Variable-Font-Test/app/src/main/res/layout/preview_fragment.xml" value="0.1703125" />
         <entry key="..\:/files/src/Variable-Font-Test/app/src/main/res/layout/preview_options.xml" value="0.3496376811594203" />
       </map>
     </option>

@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">可变字体测试器</string>
     <string name="default_preview">（点击此处即可输入任意文字）这句话后来演变成“饮水思源”这个成语，意为喝水的时候想一想流水的源头，比喻不忘本。</string>
     <string name="input_hint_for_preview">输入一些你想看到的文字。</string>
     <string name="expand_options">展开选项</string>
 
+    <string name="pref_category_normal">常规</string>
     <string name="text_size">字号</string>
     <string name="font_family">字族</string>
+
+    <string name="pref_category_variation">可变</string>
     <string name="font_weight">字重</string>
-    <string name="enable_chws">标点挤压（chws）</string>
-    <string name="app_name">可变字体测试器</string>
+    <string name="pref_category_features">特性</string>
+    <string name="switch_chws">标点挤压（chws）</string>
 
     <string name="font_family_default">默认</string>
     <string name="default_bold">粗体默认</string>

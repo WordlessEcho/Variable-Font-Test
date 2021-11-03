@@ -4,10 +4,15 @@
     <string name="input_hint_for_preview">Input some words you want to see.</string>
     <string name="expand_options">Expand Options</string>
 
+    <string name="pref_category_normal">Normal</string>
     <string name="text_size">Text size</string>
     <string name="font_family">Font Family</string>
+    
+    <string name="pref_category_variation">Variation</string>
     <string name="font_weight">Font Weight</string>
-    <string name="enable_chws">Contextual Half-width Spacing (chws)</string>
+
+    <string name="pref_category_features">Features</string>
+    <string name="switch_chws">Contextual Half-width Spacing (chws)</string>
 
     <string name="font_family_default">Default</string>
     <string name="default_bold">Default Bold</string>

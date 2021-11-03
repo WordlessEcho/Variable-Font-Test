@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:key="option_prefs">
+
+    <PreferenceCategory
+        android:key="normal_category"
+        android:title="@string/pref_category_normal">
+
+        <EditTextPreference
+            android:key="text_size"
+            android:title="@string/text_size"
+            app:useSimpleSummaryProvider="true"
+            android:inputType="number"
+            android:defaultValue="20"
+            android:persistent="false" />
+
+        <rikka.preference.SimpleMenuPreference
+            app:key="font_families"
+            app:title="@string/font_family"
+            app:defaultValue="default"
+            app:entries="@array/font_families"
+            app:entryValues="@array/font_families_value"
+            app:summary="%s"
+            android:persistent="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="variation"
+        android:title="@string/pref_category_variation">
+
+        <SeekBarPreference
+            android:key="wght"
+            android:title="@string/font_weight"
+            app:min="1"
+            android:max="1000"
+            android:defaultValue="400"
+            app:showSeekBarValue="true"
+            app:adjustable="true"
+            app:updatesContinuously="true"
+            android:persistent="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="font_features"
+        android:title="@string/pref_category_features">
+
+        <SwitchPreferenceCompat
+            android:key="chws"
+            android:title="@string/switch_chws"
+            android:defaultValue="true"
+            android:persistent="false" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
