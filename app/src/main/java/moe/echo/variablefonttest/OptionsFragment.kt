@@ -71,6 +71,7 @@ class OptionsFragment: PreferenceFragmentCompat() {
                 if (newValue.toString().toDoubleOrNull() != null) {
                     fontVariationSettings[Constants.VARIATION_AXIS_OPTICAL_SIZE] =
                         newValue.toString()
+                    previewContent.fontVariationSettings = fontVariationSettings.toFeatures()
                     true
                 } else false
             }
@@ -80,6 +81,7 @@ class OptionsFragment: PreferenceFragmentCompat() {
             setOnPreferenceChangeListener { _, newValue ->
                 if (newValue.toString().toDoubleOrNull() != null) {
                     fontVariationSettings[Constants.VARIATION_AXIS_SLANT] = newValue.toString()
+                    previewContent.fontVariationSettings = fontVariationSettings.toFeatures()
                     true
                 } else false
             }
@@ -89,6 +91,7 @@ class OptionsFragment: PreferenceFragmentCompat() {
             setOnPreferenceChangeListener { _, newValue ->
                 if (newValue.toString().toDoubleOrNull() != null) {
                     fontVariationSettings[Constants.VARIATION_AXIS_WIDTH] = newValue.toString()
+                    previewContent.fontVariationSettings = fontVariationSettings.toFeatures()
                     true
                 } else false
             }
