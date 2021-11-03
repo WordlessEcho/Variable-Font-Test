@@ -16,7 +16,6 @@
         android:importantForAutofill="no"
         android:hint="@string/input_hint_for_preview"
         android:text="@string/default_preview"
-        android:fontVariationSettings="'wght' 400"
         android:fontFeatureSettings="'chws' 1" />
 
     <ImageButton

@@ -32,6 +32,36 @@
         android:key="variation"
         android:title="@string/pref_category_variation">
 
+        <SwitchPreferenceCompat
+            android:key="ital"
+            android:title="@string/font_italic"
+            android:defaultValue="true"
+            android:persistent="false" />
+
+        <EditTextPreference
+            android:key="opsz"
+            android:title="@string/font_optical_size"
+            app:useSimpleSummaryProvider="true"
+            android:inputType="number"
+            android:defaultValue="14.00"
+            android:persistent="false" />
+
+        <EditTextPreference
+            android:key="slnt"
+            android:title="@string/font_slant"
+            app:useSimpleSummaryProvider="true"
+            android:inputType="number"
+            android:defaultValue="0.00"
+            android:persistent="false" />
+
+        <EditTextPreference
+            android:key="wdth"
+            android:title="@string/font_width"
+            app:useSimpleSummaryProvider="true"
+            android:inputType="number"
+            android:defaultValue="100.00"
+            android:persistent="false" />
+
         <SeekBarPreference
             android:key="wght"
             android:title="@string/font_weight"

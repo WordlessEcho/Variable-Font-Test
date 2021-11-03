@@ -10,7 +10,9 @@
     <string name="font_family">字族</string>
 
     <string name="pref_category_variation">可变</string>
+    <string name="font_width">字宽</string>
     <string name="font_weight">字重</string>
+
     <string name="pref_category_features">特性</string>
     <string name="switch_chws">标点挤压（chws）</string>
 

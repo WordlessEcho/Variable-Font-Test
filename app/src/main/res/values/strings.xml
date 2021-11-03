@@ -9,7 +9,11 @@
     <string name="font_family">Font Family</string>
     
     <string name="pref_category_variation">Variation</string>
-    <string name="font_weight">Font Weight</string>
+    <string name="font_italic">Italic</string>
+    <string name="font_optical_size">Optical Size</string>
+    <string name="font_slant">Slant</string>
+    <string name="font_width">Width</string>
+    <string name="font_weight">Weight</string>
 
     <string name="pref_category_features">Features</string>
     <string name="switch_chws">Contextual Half-width Spacing (chws)</string>
