@@ -28,15 +28,15 @@ class OptionsFragment: PreferenceFragmentCompat() {
 
         val previewContent: EditText =
             requireParentFragment().requireView().findViewById(R.id.preview_content)
-        val textSize: EditTextPreference? = findPreference("text_size")
-        val fontFamilies: SimpleMenuPreference? = findPreference("font_families")
+        val textSize: EditTextPreference? = findPreference(Constants.PREF_TEXT_SIZE)
+        val fontFamilies: SimpleMenuPreference? = findPreference(Constants.PREF_FONT_FAMILIES)
 
-        val ital: SwitchPreferenceCompat? = findPreference("ital")
-        val opsz: EditTextPreference? = findPreference("opsz")
-        val slnt: EditTextPreference? = findPreference("slnt")
-        val wdth: EditTextPreference? = findPreference("wdth")
-        val wght: SeekBarPreference? = findPreference("wght")
-        val chws: SwitchPreferenceCompat? = findPreference("chws")
+        val ital: SwitchPreferenceCompat? = findPreference(Constants.PREF_VARIATION_ITALIC)
+        val opsz: EditTextPreference? = findPreference(Constants.PREF_VARIATION_OPTICAL_SIZE)
+        val slnt: EditTextPreference? = findPreference(Constants.PREF_VARIATION_SLANT)
+        val wdth: EditTextPreference? = findPreference(Constants.PREF_VARIATION_WIDTH)
+        val wght: SeekBarPreference? = findPreference(Constants.PREF_VARIATION_WEIGHT)
+        val chws: SwitchPreferenceCompat? = findPreference(Constants.PREF_FEATURE_CHWS)
 
         textSize?.apply {
             setOnPreferenceChangeListener { _, newValue ->
@@ -58,35 +58,35 @@ class OptionsFragment: PreferenceFragmentCompat() {
         }
 
         ital?.apply {
-            setOnPreferenceChangeListener { preference, newValue ->
-                fontVariationSettings["ital"] = if (!isChecked) "1" else "0"
+            setOnPreferenceChangeListener { _, _ ->
+                fontVariationSettings[Constants.VARIATION_AXIS_ITALIC] = if (!isChecked) "1" else "0"
                 previewContent.fontVariationSettings = fontVariationSettings.toVariation()
                 true
             }
         }
 
         opsz?.apply {
-            setOnPreferenceChangeListener { preference, newValue ->
+            setOnPreferenceChangeListener { _, newValue ->
                 if (newValue.toString().toDoubleOrNull() != null) {
-                    fontVariationSettings["opsz"] = newValue.toString()
+                    fontVariationSettings[Constants.VARIATION_AXIS_OPTICAL_SIZE] = newValue.toString()
                     true
                 } else false
             }
         }
 
         slnt?.apply {
-            setOnPreferenceChangeListener { preference, newValue ->
+            setOnPreferenceChangeListener { _, newValue ->
                 if (newValue.toString().toDoubleOrNull() != null) {
-                    fontVariationSettings["slnt"] = newValue.toString()
+                    fontVariationSettings[Constants.VARIATION_AXIS_SLANT] = newValue.toString()
                     true
                 } else false
             }
         }
 
         wdth?.apply {
-            setOnPreferenceChangeListener { preference, newValue ->
+            setOnPreferenceChangeListener { _, newValue ->
                 if (newValue.toString().toDoubleOrNull() != null) {
-                    fontVariationSettings["wdth"] = newValue.toString()
+                    fontVariationSettings[Constants.VARIATION_AXIS_WIDTH] = newValue.toString()
                     true
                 } else false
             }
@@ -95,7 +95,7 @@ class OptionsFragment: PreferenceFragmentCompat() {
         wght?.apply {
             setOnPreferenceChangeListener { _, newValue ->
                 if (newValue.toString().toFloatOrNull() != null) {
-                    fontVariationSettings["wght"] = newValue.toString()
+                    fontVariationSettings[Constants.VARIATION_AXIS_WEIGHT] = newValue.toString()
                     previewContent.fontVariationSettings = fontVariationSettings.toVariation()
                     true
                 } else false
@@ -103,7 +103,7 @@ class OptionsFragment: PreferenceFragmentCompat() {
         }
 
         chws?.apply {
-            setOnPreferenceChangeListener { preference, newValue ->
+            setOnPreferenceChangeListener { _, _ ->
                 previewContent.fontFeatureSettings = if (!isChecked) "'chws' 1" else ""
                 true
             }

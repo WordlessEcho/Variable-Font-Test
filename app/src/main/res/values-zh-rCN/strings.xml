@@ -10,11 +10,11 @@
     <string name="font_family">字族</string>
 
     <string name="pref_category_variation">可变</string>
-    <string name="font_width">字宽</string>
-    <string name="font_weight">字重</string>
+    <string name="variation_width">字宽</string>
+    <string name="variation_weight">字重</string>
 
     <string name="pref_category_features">特性</string>
-    <string name="switch_chws">标点挤压（chws）</string>
+    <string name="feature_chws">标点挤压（chws）</string>
 
     <string name="font_family_default">默认</string>
     <string name="default_bold">粗体默认</string>

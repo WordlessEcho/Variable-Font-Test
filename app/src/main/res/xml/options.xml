@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:key="option_prefs">
+    android:key="optionPrefs">
 
     <PreferenceCategory
-        android:key="normal_category"
+        android:key="normalCategory"
         android:title="@string/pref_category_normal">
 
         <EditTextPreference
-            android:key="text_size"
+            android:key="textSize"
             android:title="@string/text_size"
             app:useSimpleSummaryProvider="true"
             android:inputType="number"
@@ -18,7 +18,7 @@
             android:persistent="false" />
 
         <rikka.preference.SimpleMenuPreference
-            app:key="font_families"
+            app:key="fontFamilies"
             app:title="@string/font_family"
             app:defaultValue="default"
             app:entries="@array/font_families"
@@ -34,13 +34,13 @@
 
         <SwitchPreferenceCompat
             android:key="ital"
-            android:title="@string/font_italic"
+            android:title="@string/variation_italic"
             android:defaultValue="true"
             android:persistent="false" />
 
         <EditTextPreference
             android:key="opsz"
-            android:title="@string/font_optical_size"
+            android:title="@string/variation_optical_size"
             app:useSimpleSummaryProvider="true"
             android:inputType="number"
             android:defaultValue="14.00"
@@ -48,7 +48,7 @@
 
         <EditTextPreference
             android:key="slnt"
-            android:title="@string/font_slant"
+            android:title="@string/variation_slant"
             app:useSimpleSummaryProvider="true"
             android:inputType="number"
             android:defaultValue="0.00"
@@ -56,7 +56,7 @@
 
         <EditTextPreference
             android:key="wdth"
-            android:title="@string/font_width"
+            android:title="@string/variation_width"
             app:useSimpleSummaryProvider="true"
             android:inputType="number"
             android:defaultValue="100.00"
@@ -64,7 +64,7 @@
 
         <SeekBarPreference
             android:key="wght"
-            android:title="@string/font_weight"
+            android:title="@string/variation_weight"
             app:min="1"
             android:max="1000"
             android:defaultValue="400"
@@ -76,12 +76,12 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="font_features"
+        android:key="fontFeatures"
         android:title="@string/pref_category_features">
 
         <SwitchPreferenceCompat
             android:key="chws"
-            android:title="@string/switch_chws"
+            android:title="@string/feature_chws"
             android:defaultValue="true"
             android:persistent="false" />
 
