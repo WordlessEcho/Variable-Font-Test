@@ -59,8 +59,9 @@ class OptionsFragment: PreferenceFragmentCompat() {
 
         ital?.apply {
             setOnPreferenceChangeListener { _, _ ->
-                fontVariationSettings[Constants.VARIATION_AXIS_ITALIC] = if (!isChecked) "1" else "0"
-                previewContent.fontVariationSettings = fontVariationSettings.toVariation()
+                fontVariationSettings[Constants.VARIATION_AXIS_ITALIC] =
+                    if (!isChecked) "1" else "0"
+                previewContent.fontVariationSettings = fontVariationSettings.toFeatures()
                 true
             }
         }
@@ -68,7 +69,8 @@ class OptionsFragment: PreferenceFragmentCompat() {
         opsz?.apply {
             setOnPreferenceChangeListener { _, newValue ->
                 if (newValue.toString().toDoubleOrNull() != null) {
-                    fontVariationSettings[Constants.VARIATION_AXIS_OPTICAL_SIZE] = newValue.toString()
+                    fontVariationSettings[Constants.VARIATION_AXIS_OPTICAL_SIZE] =
+                        newValue.toString()
                     true
                 } else false
             }
@@ -96,7 +98,7 @@ class OptionsFragment: PreferenceFragmentCompat() {
             setOnPreferenceChangeListener { _, newValue ->
                 if (newValue.toString().toFloatOrNull() != null) {
                     fontVariationSettings[Constants.VARIATION_AXIS_WEIGHT] = newValue.toString()
-                    previewContent.fontVariationSettings = fontVariationSettings.toVariation()
+                    previewContent.fontVariationSettings = fontVariationSettings.toFeatures()
                     true
                 } else false
             }
@@ -104,15 +106,13 @@ class OptionsFragment: PreferenceFragmentCompat() {
 
         chws?.apply {
             setOnPreferenceChangeListener { _, _ ->
+                // TODO: replace with list
                 previewContent.fontFeatureSettings = if (!isChecked) "'chws' 1" else ""
                 true
             }
         }
     }
 
-    private fun MutableMap<String, String>.toVariation(): String {
-        var variationSettings = ""
-        this.forEach { (t, u) -> variationSettings = "$variationSettings, '$t' $u" }
-        return variationSettings
-    }
+    private fun MutableMap<String, String>.toFeatures(): String =
+        this.toList().joinToString { "'${it.first}' ${it.second}" }
 }
