@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
     <EditText
         android:id="@+id/preview_content"
         android:layout_width="match_parent"
@@ -18,24 +19,11 @@
         android:text="@string/default_preview"
         android:fontFeatureSettings="'chws' 1" />
 
-    <ImageButton
-        android:id="@+id/toggle_options"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:layout_below="@id/preview_content"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_baseline_expand_more_24"
-        android:contentDescription="@string/expand_options" />
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/options_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toggle_options"
-        android:visibility="gone"
+        android:layout_below="@id/preview_content"
         android:name="moe.echo.variablefonttest.OptionsFragment" />
 
 </RelativeLayout>
