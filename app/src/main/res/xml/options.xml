@@ -13,7 +13,6 @@
             android:key="textSize"
             android:title="@string/text_size"
             app:useSimpleSummaryProvider="true"
-            android:inputType="number"
             android:defaultValue="20"
             android:persistent="false" />
 
@@ -42,7 +41,6 @@
             android:key="opsz"
             android:title="@string/variation_optical_size"
             app:useSimpleSummaryProvider="true"
-            android:inputType="number"
             android:defaultValue="14.00"
             android:persistent="false" />
 
@@ -50,7 +48,6 @@
             android:key="slnt"
             android:title="@string/variation_slant"
             app:useSimpleSummaryProvider="true"
-            android:inputType="number"
             android:defaultValue="0.00"
             android:persistent="false" />
 
@@ -58,7 +55,6 @@
             android:key="wdth"
             android:title="@string/variation_width"
             app:useSimpleSummaryProvider="true"
-            android:inputType="number"
             android:defaultValue="100.00"
             android:persistent="false" />
 

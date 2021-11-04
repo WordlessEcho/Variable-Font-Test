@@ -2,6 +2,7 @@ package moe.echo.variablefonttest
 
 import android.graphics.Typeface
 import android.os.Bundle
+import android.text.InputType
 import android.view.View
 import android.widget.EditText
 import androidx.preference.*
@@ -39,6 +40,9 @@ class OptionsFragment: PreferenceFragmentCompat() {
         val chws: SwitchPreferenceCompat? = findPreference(Constants.PREF_FEATURE_CHWS)
 
         textSize?.apply {
+            setOnBindEditTextListener { editText ->
+                editText.inputType = InputType.TYPE_CLASS_NUMBER
+            }
             setOnPreferenceChangeListener { _, newValue ->
                 if (newValue.toString().toFloatOrNull() != null) {
                     previewContent.textSize = newValue.toString().toFloat()
@@ -67,6 +71,9 @@ class OptionsFragment: PreferenceFragmentCompat() {
         }
 
         opsz?.apply {
+            setOnBindEditTextListener { editText ->
+                editText.inputType = InputType.TYPE_NUMBER_FLAG_DECIMAL
+            }
             setOnPreferenceChangeListener { _, newValue ->
                 if (newValue.toString().toDoubleOrNull() != null) {
                     fontVariationSettings[Constants.VARIATION_AXIS_OPTICAL_SIZE] =
@@ -78,6 +85,10 @@ class OptionsFragment: PreferenceFragmentCompat() {
         }
 
         slnt?.apply {
+            setOnBindEditTextListener { editText ->
+                editText.inputType =
+                    InputType.TYPE_NUMBER_FLAG_DECIMAL or InputType.TYPE_NUMBER_FLAG_SIGNED
+            }
             setOnPreferenceChangeListener { _, newValue ->
                 if (newValue.toString().toDoubleOrNull() != null) {
                     fontVariationSettings[Constants.VARIATION_AXIS_SLANT] = newValue.toString()
@@ -88,6 +99,9 @@ class OptionsFragment: PreferenceFragmentCompat() {
         }
 
         wdth?.apply {
+            setOnBindEditTextListener { editText ->
+                editText.inputType = InputType.TYPE_NUMBER_FLAG_DECIMAL
+            }
             setOnPreferenceChangeListener { _, newValue ->
                 if (newValue.toString().toDoubleOrNull() != null) {
                     fontVariationSettings[Constants.VARIATION_AXIS_WIDTH] = newValue.toString()
