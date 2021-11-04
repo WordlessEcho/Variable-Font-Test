@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:key="optionPrefs"
     android:title="@string/expand_options"
     app:initialExpandedChildrenCount="0">
 
