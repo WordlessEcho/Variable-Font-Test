@@ -161,6 +161,8 @@ class OptionsFragment: PreferenceFragmentCompat() {
 
         editVariation?.setOnPreferenceClickListener {
             variationEditor?.apply {
+                text = ""
+
                 if (isVisible) {
                     ital?.isVisible = true
                     opsz?.isVisible = true
@@ -208,6 +210,8 @@ class OptionsFragment: PreferenceFragmentCompat() {
 
         editFeatures?.setOnPreferenceClickListener {
             featureEditor?.apply {
+                text = ""
+
                 if (isVisible) {
                     chws?.isVisible = true
 
