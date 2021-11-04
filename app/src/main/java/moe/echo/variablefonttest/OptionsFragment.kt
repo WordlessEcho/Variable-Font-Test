@@ -25,7 +25,6 @@ class OptionsFragment: PreferenceFragmentCompat() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        listView.overScrollMode = View.OVER_SCROLL_NEVER
 
         val fontVariationSettings = mutableMapOf<String, String>()
 
