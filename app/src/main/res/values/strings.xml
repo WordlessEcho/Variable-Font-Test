@@ -6,17 +6,24 @@
 
     <string name="pref_category_normal">Normal</string>
     <string name="text_size">Text size</string>
-    <string name="font_family">Font Family</string>
-    
+    <string name="font_family">Font family</string>
+    <string name="choose_font">Choose font</string>
+
     <string name="pref_category_variation">Variation</string>
     <string name="variation_italic">Italic</string>
     <string name="variation_optical_size">Optical Size</string>
     <string name="variation_slant">Slant</string>
     <string name="variation_width">Width</string>
     <string name="variation_weight">Weight</string>
+    <string name="variation_editor">Edit variation settings</string>
+    <string name="edit_variation_text">Text mode</string>
+    <string name="edit_variation_ui">UI mode</string>
 
     <string name="pref_category_features">Features</string>
     <string name="feature_chws">Contextual Half-width Spacing (chws)</string>
+    <string name="feature_editor">Edit features</string>
+    <string name="edit_feature_text">Text mode</string>
+    <string name="edit_feature_ui">UI mode</string>
 
     <string name="font_family_default">Default</string>
     <string name="default_bold">Default Bold</string>

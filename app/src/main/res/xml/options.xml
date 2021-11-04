@@ -30,7 +30,7 @@
         <Preference
             android:key="customFont"
             app:isPreferenceVisible="false"
-            android:title="Choose Font"
+            android:title="@string/choose_font"
             android:icon="@drawable/ic_baseline_open_in_new_24" />
 
     </PreferenceCategory>
@@ -77,6 +77,18 @@
             app:updatesContinuously="true"
             android:persistent="false" />
 
+        <EditTextPreference
+            android:key="variationEditor"
+            android:title="@string/variation_editor"
+            app:useSimpleSummaryProvider="true"
+            android:persistent="false"
+            app:isPreferenceVisible="false" />
+
+        <Preference
+            android:key="editVariation"
+            android:title="@string/edit_variation_text"
+            android:icon="@drawable/ic_baseline_edit_24" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -88,6 +100,18 @@
             android:title="@string/feature_chws"
             android:defaultValue="true"
             android:persistent="false" />
+
+        <EditTextPreference
+            android:key="featureEditor"
+            android:title="@string/feature_editor"
+            app:useSimpleSummaryProvider="true"
+            android:persistent="false"
+            app:isPreferenceVisible="false" />
+
+        <Preference
+            android:key="editFeature"
+            android:title="@string/edit_feature_text"
+            android:icon="@drawable/ic_baseline_edit_24" />
 
     </PreferenceCategory>
 

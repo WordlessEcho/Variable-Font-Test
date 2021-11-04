@@ -8,13 +8,20 @@
     <string name="pref_category_normal">常规</string>
     <string name="text_size">字号</string>
     <string name="font_family">字族</string>
+    <string name="choose_font">选择字体</string>
 
     <string name="pref_category_variation">可变</string>
     <string name="variation_width">字宽</string>
     <string name="variation_weight">字重</string>
+    <string name="variation_editor">编辑可变设置</string>
+    <string name="edit_variation_text">文本模式</string>
+    <string name="edit_variation_ui">图形界面模式</string>
 
     <string name="pref_category_features">特性</string>
     <string name="feature_chws">标点挤压（chws）</string>
+    <string name="feature_editor">编辑字体特性设置</string>
+    <string name="edit_feature_text">文本模式</string>
+    <string name="edit_feature_ui">图形界面模式</string>
 
     <string name="font_family_default">默认</string>
     <string name="default_bold">粗体默认</string>
