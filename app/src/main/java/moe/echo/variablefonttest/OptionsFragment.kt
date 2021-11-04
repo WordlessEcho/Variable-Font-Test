@@ -1,14 +1,21 @@
 package moe.echo.variablefonttest
 
 import android.graphics.Typeface
+import android.net.Uri
 import android.os.Bundle
 import android.text.InputType
 import android.view.View
 import android.widget.EditText
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.preference.*
 import rikka.preference.SimpleMenuPreference
 
 class OptionsFragment: PreferenceFragmentCompat() {
+
+    private val getFont =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            if (uri != null) changeFontFromUri(uri)
+        }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.options, rootKey)
@@ -20,17 +27,20 @@ class OptionsFragment: PreferenceFragmentCompat() {
 
         val fontVariationSettings = mutableMapOf<String, String>()
 
-        val fontFamilyValues = resources.getStringArray(R.array.font_families_value)
+        // Drop custom font option
+        val fontFamilyValues = resources.getStringArray(R.array.font_families_value).dropLast(1)
         val fontFamilyList = arrayOf(
             Typeface.DEFAULT, Typeface.DEFAULT_BOLD, Typeface.MONOSPACE,
             Typeface.SANS_SERIF, Typeface.SERIF
         )
+        // Pair options and typefaces
         val valueToTypeface = fontFamilyValues.zip(fontFamilyList).toMap()
 
         val previewContent: EditText =
             requireParentFragment().requireView().findViewById(R.id.preview_content)
         val textSize: EditTextPreference? = findPreference(Constants.PREF_TEXT_SIZE)
         val fontFamilies: SimpleMenuPreference? = findPreference(Constants.PREF_FONT_FAMILIES)
+        val customFont: Preference? = findPreference(Constants.PREF_CUSTOM_FONT)
 
         val ital: SwitchPreferenceCompat? = findPreference(Constants.PREF_VARIATION_ITALIC)
         val opsz: EditTextPreference? = findPreference(Constants.PREF_VARIATION_OPTICAL_SIZE)
@@ -53,12 +63,26 @@ class OptionsFragment: PreferenceFragmentCompat() {
 
         fontFamilies?.apply {
             setOnPreferenceChangeListener { _, newValue ->
-                if (valueToTypeface.contains(newValue)) {
-                    previewContent.typeface = valueToTypeface[newValue]
-                    wght?.value = 400
-                    true
-                } else false
+                when {
+                    valueToTypeface.contains(newValue) -> {
+                        customFont?.isVisible = false
+                        previewContent.typeface = valueToTypeface[newValue]
+                        wght?.value = 400
+                        true
+                    }
+                    newValue == resources.getStringArray(R.array.font_families_value).last() -> {
+                        customFont?.isVisible = true
+                        wght?.value = 400
+                        true
+                    }
+                    else -> false
+                }
             }
+        }
+
+        customFont?.setOnPreferenceClickListener {
+            getFont.launch("font/*")
+            true
         }
 
         ital?.apply {
@@ -132,4 +156,17 @@ class OptionsFragment: PreferenceFragmentCompat() {
 
     private fun MutableMap<String, String>.toFeatures(): String =
         this.toList().joinToString { "'${it.first}' ${it.second}" }
+
+    private fun changeFontFromUri(uri: Uri) {
+        activity?.runOnUiThread {
+            val previewContent: EditText? = parentFragment?.view?.findViewById(R.id.preview_content)
+
+            if (uri.path != null) {
+                activity?.contentResolver?.openFileDescriptor(uri, "r")?.apply {
+                    val builder = Typeface.Builder(fileDescriptor)
+                    previewContent?.typeface = builder.build()
+                }
+            }
+        }
+    }
 }

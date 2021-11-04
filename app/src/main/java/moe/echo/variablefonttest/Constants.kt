@@ -3,6 +3,7 @@ package moe.echo.variablefonttest
 object Constants {
     const val PREF_TEXT_SIZE = "textSize"
     const val PREF_FONT_FAMILIES = "fontFamilies"
+    const val PREF_CUSTOM_FONT = "customFont"
 
     const val VARIATION_AXIS_ITALIC = "ital"
     const val VARIATION_AXIS_OPTICAL_SIZE = "opsz"

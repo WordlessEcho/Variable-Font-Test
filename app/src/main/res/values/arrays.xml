@@ -6,6 +6,7 @@
         <item>@string/monospaced</item>
         <item>@string/sans_serif</item>
         <item>@string/serif</item>
+        <item>@string/custom_font</item>
     </string-array>
 
     <string-array name="font_families_value">
@@ -14,5 +15,6 @@
         <item>monospaced</item>
         <item>sans-serif</item>
         <item>serif</item>
+        <item>custom</item>
     </string-array>
 </resources>

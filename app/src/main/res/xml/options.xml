@@ -27,6 +27,12 @@
             app:summary="%s"
             android:persistent="false" />
 
+        <Preference
+            android:key="customFont"
+            app:isPreferenceVisible="false"
+            android:title="Choose Font"
+            android:icon="@drawable/ic_baseline_open_in_new_24" />
+
     </PreferenceCategory>
 
     <PreferenceCategory

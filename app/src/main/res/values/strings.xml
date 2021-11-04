@@ -23,4 +23,5 @@
     <string name="monospaced">Monospaced</string>
     <string name="sans_serif">Sans-serif</string>
     <string name="serif">Serif</string>
+    <string name="custom_font">Custom</string>
 </resources>
