@@ -1,6 +1,7 @@
 package moe.echo.variablefonttest
 
 object Constants {
+    const val PREF_OPTIONS = "optionPrefs"
     const val PREF_TEXT_SIZE = "textSize"
     const val PREF_FONT_FAMILIES = "fontFamilies"
     const val PREF_CUSTOM_FONT = "customFont"
