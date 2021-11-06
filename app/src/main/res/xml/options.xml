@@ -23,7 +23,7 @@
             app:title="@string/font_family"
             app:defaultValue="default"
             app:entries="@array/font_families"
-            app:entryValues="@array/font_families_value"
+            app:entryValues="@array/font_family_values"
             app:summary="%s"
             android:persistent="false" />
 
@@ -35,35 +35,46 @@
 
     </PreferenceCategory>
 
+    <!-- https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg#registered-axis-tags -->
+    <!-- https://fonts.google.com/variablefonts#axis-definitions -->
     <PreferenceCategory
         android:key="variation"
         android:title="@string/pref_category_variation">
 
-        <SwitchPreferenceCompat
+        <SeekBarPreference
             android:key="ital"
             android:title="@string/variation_italic"
-            android:defaultValue="false"
+            app:min="0"
+            android:max="10"
+            android:defaultValue="0"
+            app:updatesContinuously="true"
             android:persistent="false" />
 
-        <EditTextPreference
+        <SeekBarPreference
             android:key="opsz"
             android:title="@string/variation_optical_size"
-            app:useSimpleSummaryProvider="true"
-            android:defaultValue="14.00"
+            app:min="1"
+            android:max="1440"
+            android:defaultValue="1"
+            app:updatesContinuously="true"
             android:persistent="false" />
 
-        <EditTextPreference
+        <SeekBarPreference
             android:key="slnt"
             android:title="@string/variation_slant"
-            app:useSimpleSummaryProvider="true"
-            android:defaultValue="0.00"
+            app:min="0"
+            android:max="180"
+            android:defaultValue="90"
+            app:updatesContinuously="true"
             android:persistent="false" />
 
-        <EditTextPreference
+        <SeekBarPreference
             android:key="wdth"
             android:title="@string/variation_width"
-            app:useSimpleSummaryProvider="true"
-            android:defaultValue="100.00"
+            app:min="0"
+            android:max="2000"
+            android:defaultValue="1000"
+            app:updatesContinuously="true"
             android:persistent="false" />
 
         <SeekBarPreference
@@ -98,7 +109,7 @@
         <SwitchPreferenceCompat
             android:key="chws"
             android:title="@string/feature_chws"
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:persistent="false" />
 
         <EditTextPreference

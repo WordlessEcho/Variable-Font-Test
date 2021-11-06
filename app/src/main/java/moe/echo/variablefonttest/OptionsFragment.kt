@@ -14,6 +14,8 @@ import rikka.preference.SimpleMenuPreference
 
 class OptionsFragment: PreferenceFragmentCompat() {
 
+    private val fontVariationSettings = mutableMapOf<String, String>()
+
     private val getFont =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             if (uri != null) changeFontFromUri(uri)
@@ -26,10 +28,8 @@ class OptionsFragment: PreferenceFragmentCompat() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val fontVariationSettings = mutableMapOf<String, String>()
-
         // Drop custom font option
-        val fontFamilyValues = resources.getStringArray(R.array.font_families_value).dropLast(1)
+        val fontFamilyValues = resources.getStringArray(R.array.font_family_values).dropLast(1)
         val fontFamilyList = arrayOf(
             Typeface.DEFAULT, Typeface.DEFAULT_BOLD, Typeface.MONOSPACE,
             Typeface.SANS_SERIF, Typeface.SERIF
@@ -43,10 +43,10 @@ class OptionsFragment: PreferenceFragmentCompat() {
         val fontFamilies: SimpleMenuPreference? = findPreference(Constants.PREF_FONT_FAMILIES)
         val customFont: Preference? = findPreference(Constants.PREF_CUSTOM_FONT)
 
-        val ital: SwitchPreferenceCompat? = findPreference(Constants.PREF_VARIATION_ITALIC)
-        val opsz: EditTextPreference? = findPreference(Constants.PREF_VARIATION_OPTICAL_SIZE)
-        val slnt: EditTextPreference? = findPreference(Constants.PREF_VARIATION_SLANT)
-        val wdth: EditTextPreference? = findPreference(Constants.PREF_VARIATION_WIDTH)
+        val ital: SeekBarPreference? = findPreference(Constants.PREF_VARIATION_ITALIC)
+        val opsz: SeekBarPreference? = findPreference(Constants.PREF_VARIATION_OPTICAL_SIZE)
+        val slnt: SeekBarPreference? = findPreference(Constants.PREF_VARIATION_SLANT)
+        val wdth: SeekBarPreference? = findPreference(Constants.PREF_VARIATION_WIDTH)
         val wght: SeekBarPreference? = findPreference(Constants.PREF_VARIATION_WEIGHT)
         val variationEditor: EditTextPreference? = findPreference(Constants.PREF_VARIATION_EDITOR)
         val editVariation: Preference? = findPreference(Constants.PREF_EDIT_VARIATION)
@@ -72,12 +72,11 @@ class OptionsFragment: PreferenceFragmentCompat() {
                 valueToTypeface.contains(newValue) -> {
                     customFont?.isVisible = false
                     previewContent.typeface = valueToTypeface[newValue]
-                    wght?.value = 400
+                    previewContent.fontVariationSettings = fontVariationSettings.toFeatures()
                     true
                 }
-                newValue == resources.getStringArray(R.array.font_families_value).last() -> {
+                newValue == resources.getStringArray(R.array.font_family_values).last() -> {
                     customFont?.isVisible = true
-                    wght?.value = 400
                     true
                 }
                 else -> false
@@ -89,62 +88,55 @@ class OptionsFragment: PreferenceFragmentCompat() {
             true
         }
 
-        ital?.setOnPreferenceChangeListener { _, _ ->
-            fontVariationSettings[Constants.VARIATION_AXIS_ITALIC] =
-                if (!ital.isChecked) "1" else "0"
-            previewContent.fontVariationSettings = fontVariationSettings.toFeatures()
-            true
+        // SeekBar only support positive integers
+        ital?.setOnPreferenceChangeListener { _, newValue ->
+            val value = newValue.toString().toFloatOrNull()
+
+            if (value != null) {
+                fontVariationSettings[Constants.VARIATION_AXIS_ITALIC] = (value / 10).toString()
+                previewContent.fontVariationSettings = fontVariationSettings.toFeatures()
+                true
+            } else false
         }
 
-        opsz?.apply {
-            setOnBindEditTextListener { editText ->
-                editText.inputType = InputType.TYPE_NUMBER_FLAG_DECIMAL
-            }
-            setOnPreferenceChangeListener { _, newValue ->
-                if (newValue.toString().toDoubleOrNull() != null) {
-                    fontVariationSettings[Constants.VARIATION_AXIS_OPTICAL_SIZE] =
-                        newValue.toString()
-                    previewContent.fontVariationSettings = fontVariationSettings.toFeatures()
-                    true
-                } else false
-            }
+        opsz?.setOnPreferenceChangeListener { _, newValue ->
+            val value = newValue.toString().toFloatOrNull()
+
+            if (value != null) {
+                fontVariationSettings[Constants.VARIATION_AXIS_OPTICAL_SIZE] = (value / 10).toString()
+                previewContent.fontVariationSettings = fontVariationSettings.toFeatures()
+                true
+            } else false
         }
 
-        slnt?.apply {
-            setOnBindEditTextListener { editText ->
-                editText.inputType =
-                    InputType.TYPE_NUMBER_FLAG_DECIMAL or InputType.TYPE_NUMBER_FLAG_SIGNED
-            }
-            setOnPreferenceChangeListener { _, newValue ->
-                if (newValue.toString().toDoubleOrNull() != null) {
-                    fontVariationSettings[Constants.VARIATION_AXIS_SLANT] = newValue.toString()
-                    previewContent.fontVariationSettings = fontVariationSettings.toFeatures()
-                    true
-                } else false
-            }
+        slnt?.setOnPreferenceChangeListener { _, newValue ->
+            val value = newValue.toString().toFloatOrNull()
+
+            if (value != null) {
+                fontVariationSettings[Constants.VARIATION_AXIS_SLANT] = (value - 90).toString()
+                previewContent.fontVariationSettings = fontVariationSettings.toFeatures()
+                true
+            } else false
         }
 
-        wdth?.apply {
-            setOnBindEditTextListener { editText ->
-                editText.inputType = InputType.TYPE_NUMBER_FLAG_DECIMAL
-            }
-            setOnPreferenceChangeListener { _, newValue ->
-                if (newValue.toString().toDoubleOrNull() != null) {
-                    fontVariationSettings[Constants.VARIATION_AXIS_WIDTH] = newValue.toString()
-                    previewContent.fontVariationSettings = fontVariationSettings.toFeatures()
-                    true
-                } else false
-            }
+        wdth?.setOnPreferenceChangeListener { _, newValue ->
+            val value = newValue.toString().toFloatOrNull()
+
+            if (value != null) {
+                fontVariationSettings[Constants.VARIATION_AXIS_WIDTH] = (value / 10).toString()
+                previewContent.fontVariationSettings = fontVariationSettings.toFeatures()
+                true
+            } else false
         }
 
-        wght?.apply {
-            setOnPreferenceChangeListener { _, newValue ->
-                if (newValue.toString().toFloatOrNull() != null) {
-                    fontVariationSettings[Constants.VARIATION_AXIS_WEIGHT] = newValue.toString()
-                    previewContent.fontVariationSettings = fontVariationSettings.toFeatures()
-                    true
-                } else false
-            }
+        wght?.setOnPreferenceChangeListener { _, newValue ->
+            val value = newValue.toString().toFloatOrNull()
+
+            if (value != null) {
+                fontVariationSettings[Constants.VARIATION_AXIS_WEIGHT] = value.toString()
+                previewContent.fontVariationSettings = fontVariationSettings.toFeatures()
+                true
+            } else false
         }
 
         variationEditor?.setOnPreferenceChangeListener { _, newValue ->
@@ -159,7 +151,7 @@ class OptionsFragment: PreferenceFragmentCompat() {
 
         editVariation?.setOnPreferenceClickListener {
             variationEditor?.apply {
-                text = ""
+                text = fontVariationSettings.toFeatures()
 
                 if (isVisible) {
                     ital?.isVisible = true
@@ -241,6 +233,7 @@ class OptionsFragment: PreferenceFragmentCompat() {
             if (uri.path != null) {
                 activity?.contentResolver?.openFileDescriptor(uri, "r")?.apply {
                     val builder = Typeface.Builder(fileDescriptor)
+                    builder.setFontVariationSettings(fontVariationSettings.toFeatures())
                     previewContent?.typeface = builder.build()
                 }
             }

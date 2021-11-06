@@ -9,7 +9,7 @@
         <item>@string/custom_font</item>
     </string-array>
 
-    <string-array name="font_families_value">
+    <string-array name="font_family_values">
         <item>default</item>
         <item>default-bold</item>
         <item>monospaced</item>

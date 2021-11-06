@@ -16,8 +16,7 @@
         android:paddingEnd="16dp"
         android:importantForAutofill="no"
         android:hint="@string/input_hint_for_preview"
-        android:text="@string/default_preview"
-        android:fontFeatureSettings="'chws' 1" />
+        android:text="@string/default_preview" />
 
     <ImageButton
         android:id="@+id/toggle_options"
