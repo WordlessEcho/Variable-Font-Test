@@ -4,37 +4,45 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/preview_content"
+    <RelativeLayout
+        android:id="@+id/preview_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:inputType="textMultiLine"
-        android:textSize="20sp"
-        android:paddingTop="8dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:importantForAutofill="no"
-        android:hint="@string/input_hint_for_preview"
-        android:text="@string/default_preview" />
+        android:background="@color/preview_content_background"
+        android:elevation="2dp"
+        android:orientation="vertical">
+        <EditText
+            android:id="@+id/preview_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:inputType="textMultiLine"
+            android:textSize="20sp"
+            android:paddingTop="8dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:importantForAutofill="no"
+            android:hint="@string/input_hint_for_preview"
+            android:text="@string/default_preview" />
 
-    <ImageButton
-        android:id="@+id/toggle_options"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:layout_below="@id/preview_content"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_baseline_expand_less_24"
-        android:contentDescription="@string/expand_options" />
+        <ImageButton
+            android:id="@+id/toggle_options"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_below="@id/preview_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_baseline_expand_less_24"
+            android:contentDescription="@string/expand_options" />
+    </RelativeLayout>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/options_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toggle_options"
+        android:layout_below="@id/preview_header"
         android:name="moe.echo.variablefonttest.OptionsFragment" />
 
 </RelativeLayout>
