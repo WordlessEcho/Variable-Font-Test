@@ -27,6 +27,14 @@
             app:summary="%s"
             android:persistent="false" />
 
+        <EditTextPreference
+            android:key="ttcIndex"
+            app:isPreferenceVisible="false"
+            android:title="@string/ttc_index"
+            app:useSimpleSummaryProvider="true"
+            android:defaultValue="0"
+            android:persistent="false" />
+
         <Preference
             android:key="customFont"
             app:isPreferenceVisible="false"

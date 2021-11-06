@@ -8,6 +8,7 @@
     <string name="text_size">Text size</string>
     <string name="font_family">Font family</string>
     <string name="choose_font">Choose font</string>
+    <string name="ttc_index">TTC index</string>
 
     <string name="pref_category_variation">Variation</string>
     <string name="variation_italic">Italic</string>

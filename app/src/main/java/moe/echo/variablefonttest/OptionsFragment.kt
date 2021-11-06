@@ -41,6 +41,7 @@ class OptionsFragment: PreferenceFragmentCompat() {
             requireParentFragment().requireView().findViewById(R.id.preview_content)
         val textSize: EditTextPreference? = findPreference(Constants.PREF_TEXT_SIZE)
         val fontFamilies: SimpleMenuPreference? = findPreference(Constants.PREF_FONT_FAMILIES)
+        val ttcIndex: EditTextPreference? = findPreference(Constants.PREF_TTC_INDEX)
         val customFont: Preference? = findPreference(Constants.PREF_CUSTOM_FONT)
 
         val ital: SeekBarPreference? = findPreference(Constants.PREF_VARIATION_ITALIC)
@@ -54,6 +55,10 @@ class OptionsFragment: PreferenceFragmentCompat() {
         val chws: SwitchPreferenceCompat? = findPreference(Constants.PREF_FEATURE_CHWS)
         val featureEditor: EditTextPreference? = findPreference(Constants.PREF_FEATURE_EDITOR)
         val editFeatures: Preference? = findPreference(Constants.PREF_EDIT_FEATURE)
+
+        ttcIndex?.setOnBindEditTextListener { editText ->
+            editText.inputType = InputType.TYPE_CLASS_NUMBER
+        }
 
         textSize?.apply {
             setOnBindEditTextListener { editText ->
@@ -71,12 +76,14 @@ class OptionsFragment: PreferenceFragmentCompat() {
             when {
                 valueToTypeface.contains(newValue) -> {
                     customFont?.isVisible = false
+                    ttcIndex?.isVisible = false
                     previewContent.typeface = valueToTypeface[newValue]
                     previewContent.fontVariationSettings = fontVariationSettings.toFeatures()
                     true
                 }
                 newValue == resources.getStringArray(R.array.font_family_values).last() -> {
                     customFont?.isVisible = true
+                    ttcIndex?.isVisible = true
                     true
                 }
                 else -> false
@@ -229,11 +236,13 @@ class OptionsFragment: PreferenceFragmentCompat() {
     private fun changeFontFromUri(uri: Uri) {
         activity?.runOnUiThread {
             val previewContent: EditText? = parentFragment?.view?.findViewById(R.id.preview_content)
+            val ttcIndex: EditTextPreference? = findPreference(Constants.PREF_TTC_INDEX)
 
             if (uri.path != null) {
                 activity?.contentResolver?.openFileDescriptor(uri, "r")?.apply {
                     val builder = Typeface.Builder(fileDescriptor)
                     builder.setFontVariationSettings(fontVariationSettings.toFeatures())
+                    builder.setTtcIndex(ttcIndex?.text?.toInt() ?: 0)
                     previewContent?.typeface = builder.build()
                 }
             }
