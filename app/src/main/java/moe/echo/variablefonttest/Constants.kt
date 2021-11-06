@@ -6,6 +6,8 @@ object Constants {
     const val PREF_TTC_INDEX = "ttcIndex"
     const val PREF_CUSTOM_FONT = "customFont"
 
+    const val OPTION_CUSTOM_VALUE = "custom"
+
     const val VARIATION_AXIS_ITALIC = "ital"
     const val VARIATION_AXIS_OPTICAL_SIZE = "opsz"
     const val VARIATION_AXIS_SLANT = "slnt"

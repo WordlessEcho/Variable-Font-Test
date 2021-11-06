@@ -28,8 +28,9 @@ class OptionsFragment: PreferenceFragmentCompat() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val fontFamilyOptions = resources.getStringArray(R.array.font_family_values)
         // Drop custom font option
-        val fontFamilyValues = resources.getStringArray(R.array.font_family_values).dropLast(1)
+        val fontFamilyValues = fontFamilyOptions.filter { s -> s != Constants.OPTION_CUSTOM_VALUE }
         val fontFamilyList = arrayOf(
             Typeface.DEFAULT, Typeface.DEFAULT_BOLD, Typeface.MONOSPACE,
             Typeface.SANS_SERIF, Typeface.SERIF
@@ -81,7 +82,7 @@ class OptionsFragment: PreferenceFragmentCompat() {
                     previewContent.fontVariationSettings = fontVariationSettings.toFeatures()
                     true
                 }
-                newValue == resources.getStringArray(R.array.font_family_values).last() -> {
+                newValue == Constants.OPTION_CUSTOM_VALUE -> {
                     customFont?.isVisible = true
                     ttcIndex?.isVisible = true
                     true
