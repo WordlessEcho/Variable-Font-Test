@@ -27,7 +27,7 @@
     <string name="edit_feature_ui">UI mode</string>
 
     <string name="font_family_default">Default</string>
-    <string name="default_bold">Default Bold</string>
+    <string name="default_bold">Default bold</string>
     <string name="monospaced">Monospaced</string>
     <string name="sans_serif">Sans-serif</string>
     <string name="serif">Serif</string>
