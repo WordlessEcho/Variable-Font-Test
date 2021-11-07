@@ -132,4 +132,19 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:key="about"
+        android:title="@string/pref_category_about">
+
+        <Preference
+            android:key="sourceCode"
+            android:title="@string/pref_source_code"
+            android:icon="@drawable/ic_baseline_code_24">
+
+            <intent android:action="android.intent.action.VIEW"
+                android:data="@string/project_homepage" />
+
+        </Preference>
+    </PreferenceCategory>
+
 </PreferenceScreen>

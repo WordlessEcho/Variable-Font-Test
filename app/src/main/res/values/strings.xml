@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Variable Font Test</string>
+    <string name="project_homepage" translatable="false">
+        https://github.com/WordlessEcho/Variable-Font-Test
+    </string>
+
     <string name="default_preview">(Click here to input any text you want to see.) This sentence becomes to the idiom of when you drink water, think of its source, which means don’t just be thankful for the water: be thankful for all the elements and processes (both past and present) that allowed you to enjoy that humble cup of water.</string>
     <string name="input_hint_for_preview">Input some words you want to see.</string>
     <string name="expand_options">Expand Options</string>
@@ -25,6 +29,9 @@
     <string name="feature_editor">Edit features</string>
     <string name="edit_feature_text">Text mode</string>
     <string name="edit_feature_ui">UI mode</string>
+
+    <string name="pref_category_about">About</string>
+    <string name="pref_source_code">Source code</string>
 
     <string name="font_family_default">Default</string>
     <string name="default_bold">Default bold</string>
