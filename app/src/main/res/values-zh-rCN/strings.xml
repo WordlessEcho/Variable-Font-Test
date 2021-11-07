@@ -23,6 +23,9 @@
     <string name="edit_feature_text">文本模式</string>
     <string name="edit_feature_ui">图形界面模式</string>
 
+    <string name="pref_category_about">关于</string>
+    <string name="pref_source_code">源代码</string>
+
     <string name="font_family_default">默认</string>
     <string name="default_bold">粗体默认</string>
     <string name="monospaced">等宽</string>
