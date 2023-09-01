@@ -4,13 +4,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion 31
-    buildToolsVersion "30.0.2"
-
     defaultConfig {
         applicationId "moe.echo.variablefonttest"
         minSdkVersion 28
-        targetSdkVersion 31
+        compileSdk 31
+        targetSdk 31
         versionCode 10
         versionName "2.6"
 
@@ -30,6 +28,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    namespace 'moe.echo.variablefonttest'
 }
 
 dependencies {
