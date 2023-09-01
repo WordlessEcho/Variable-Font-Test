@@ -15,6 +15,7 @@ import rikka.preference.SimpleMenuPreference
 class OptionsFragment: PreferenceFragmentCompat() {
 
     private val fontVariationSettings = mutableMapOf<String, String>()
+    private val fontFeatureSettings = mutableMapOf<String, String>()
 
     private val getFont =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
@@ -190,8 +191,8 @@ class OptionsFragment: PreferenceFragmentCompat() {
 
         chws?.apply {
             setOnPreferenceChangeListener { _, _ ->
-                // TODO: replace with list
-                previewContent.fontFeatureSettings = if (!isChecked) "'chws' 1" else ""
+                fontFeatureSettings[Constants.FEATURE_CHWS] = if (!isChecked) "1" else "0"
+                previewContent.fontFeatureSettings = fontFeatureSettings.toFeatures()
                 true
             }
         }
@@ -208,7 +209,7 @@ class OptionsFragment: PreferenceFragmentCompat() {
 
         editFeatures?.setOnPreferenceClickListener {
             featureEditor?.apply {
-                text = ""
+                text = fontFeatureSettings.toFeatures()
 
                 if (isVisible) {
                     chws?.isVisible = true
