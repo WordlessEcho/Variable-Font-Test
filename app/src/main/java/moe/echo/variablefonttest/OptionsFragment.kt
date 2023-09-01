@@ -245,6 +245,7 @@ class OptionsFragment: PreferenceFragmentCompat() {
                     builder.setFontVariationSettings(fontVariationSettings.toFeatures())
                     builder.setTtcIndex(ttcIndex?.text?.toInt() ?: 0)
                     previewContent?.typeface = builder.build()
+                    close()
                 }
             }
         }
