@@ -45,8 +45,8 @@
     <!-- https://docs.microsoft.com/en-us/typography/opentype/spec/dvaraxisreg#registered-axis-tags -->
     <!-- https://fonts.google.com/variablefonts#axis-definitions -->
     <PreferenceCategory
-        android:key="variation"
-        android:title="@string/pref_category_variation"
+        android:key="variations"
+        android:title="@string/pref_category_variations"
         android:enabled="false" >
 
         <Preference

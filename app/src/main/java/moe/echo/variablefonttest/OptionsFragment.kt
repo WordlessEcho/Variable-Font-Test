@@ -244,7 +244,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
         val ttcIndex: EditTextPreference? = findPreference(Constants.PREF_TTC_INDEX)
         val customFont: Preference? = findPreference(Constants.PREF_CUSTOM_FONT)
 
-        val variation = findPreference<PreferenceCategory>(Constants.PREF_CATEGORY_VARIATION)
+        val variations = findPreference<PreferenceCategory>(Constants.PREF_CATEGORY_VARIATIONS)
         val ital: SeekBarPreference? = findPreference(Constants.PREF_VARIATION_ITALIC)
         val opsz: SeekBarPreference? = findPreference(Constants.PREF_VARIATION_OPTICAL_SIZE)
         val slnt: SeekBarPreference? = findPreference(Constants.PREF_VARIATION_SLANT)
@@ -267,7 +267,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            variation?.isEnabled = true
+            variations?.isEnabled = true
 
             val unsupportedAndroid = findPreference<Preference>(Constants.PREF_UNSUPPORTED_ANDROID)
             unsupportedAndroid?.isVisible = false
@@ -377,8 +377,8 @@ class OptionsFragment : PreferenceFragmentCompat() {
         }
 
         addVariation?.setOnPreferenceClickListener {
-            if (variation != null) {
-                createAddPreferenceDialog(view.context, variation) { tagName, value ->
+            if (variations != null) {
+                createAddPreferenceDialog(view.context, variations) { tagName, value ->
                     fontVariationSettings[tagName] = value
                     setVariation(fontVariationSettings.toFeatures())
                 }.apply {
@@ -394,7 +394,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
                 text = fontVariationSettings.toFeatures()
 
                 if (isVisible) {
-                    variation?.forEach {
+                    variations?.forEach {
                         if (
                             it.key !in setOf(
                                 Constants.PREF_ADD_FONT_VARIATION,
@@ -410,7 +410,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
                         ContextCompat.getDrawable(context, R.drawable.ic_baseline_edit_24)
                     editVariation.title = getString(R.string.edit_variation_text)
                 } else {
-                    variation?.forEach {
+                    variations?.forEach {
                         if (
                             it.key !in setOf(
                                 Constants.PREF_ADD_FONT_VARIATION,
