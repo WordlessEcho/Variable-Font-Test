@@ -23,6 +23,7 @@
     <string name="variation_width">Width</string>
     <string name="variation_weight">Weight</string>
     <string name="variation_editor">Edit variation settings</string>
+    <string name="add_font_variation">Add font variation</string>
     <string name="edit_variation_text">Text mode</string>
     <string name="edit_variation_ui">UI mode</string>
 

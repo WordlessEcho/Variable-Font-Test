@@ -16,6 +16,7 @@
     <string name="variation_width">字宽</string>
     <string name="variation_weight">字重</string>
     <string name="variation_editor">编辑可变设置</string>
+    <string name="add_font_variation">添加可变设置</string>
     <string name="edit_variation_text">文本模式</string>
     <string name="edit_variation_ui">图形界面模式</string>
 

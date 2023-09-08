@@ -110,6 +110,11 @@
             app:isPreferenceVisible="false" />
 
         <Preference
+            android:key="addVariation"
+            android:title="@string/add_font_variation"
+            android:icon="@drawable/baseline_add_24" />
+
+        <Preference
             android:key="editVariation"
             android:title="@string/edit_variation_text"
             android:icon="@drawable/ic_baseline_edit_24" />

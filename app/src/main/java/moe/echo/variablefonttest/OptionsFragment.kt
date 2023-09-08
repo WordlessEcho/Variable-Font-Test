@@ -204,6 +204,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
         val wdth: SeekBarPreference? = findPreference(Constants.PREF_VARIATION_WIDTH)
         val wght: SeekBarPreference? = findPreference(Constants.PREF_VARIATION_WEIGHT)
         val variationEditor: EditTextPreference? = findPreference(Constants.PREF_VARIATION_EDITOR)
+        val addVariation: Preference? = findPreference(Constants.PREF_ADD_FONT_VARIATION)
         val editVariation: Preference? = findPreference(Constants.PREF_EDIT_VARIATION)
 
         val fontFeatures = findPreference<PreferenceCategory>(Constants.PREF_CATEGORY_FONT_FEATURES)
@@ -326,6 +327,19 @@ class OptionsFragment : PreferenceFragmentCompat() {
                 Toast.makeText(context, e.message.toString(), Toast.LENGTH_LONG).show()
             }
             false
+        }
+
+        addVariation?.setOnPreferenceClickListener {
+            if (variation != null) {
+                createAddPreferenceDialog(view.context, variation) { tagName, value ->
+                    fontVariationSettings[tagName] = value
+                    setVariation(fontVariationSettings.toFeatures())
+                }.apply {
+                    setTitle(R.string.add_font_variation)
+                    show()
+                }
+                true
+            } else false
         }
 
         editVariation?.setOnPreferenceClickListener {

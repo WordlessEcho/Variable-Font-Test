@@ -25,6 +25,7 @@ object Constants {
     const val PREF_VARIATION_WIDTH = VARIATION_AXIS_WIDTH
     const val PREF_VARIATION_WEIGHT = VARIATION_AXIS_WEIGHT
     const val PREF_VARIATION_EDITOR = "variationEditor"
+    const val PREF_ADD_FONT_VARIATION = "addVariation"
     const val PREF_EDIT_VARIATION = "editVariation"
 
     const val PREF_FEATURE_CHWS = FEATURE_CHWS
