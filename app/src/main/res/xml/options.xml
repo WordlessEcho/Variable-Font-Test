@@ -126,6 +126,11 @@
             app:isPreferenceVisible="false" />
 
         <Preference
+            android:key="addFeature"
+            android:title="@string/add_font_feature_text"
+            android:icon="@drawable/baseline_add_24" />
+
+        <Preference
             android:key="editFeature"
             android:title="@string/edit_feature_text"
             android:icon="@drawable/ic_baseline_edit_24" />

@@ -27,6 +27,7 @@
     <string name="pref_category_features">Features</string>
     <string name="feature_chws">Contextual Half-width Spacing (chws)</string>
     <string name="feature_editor">Edit features</string>
+    <string name="add_font_feature_text">Add font feature</string>
     <string name="edit_feature_text">Text mode</string>
     <string name="edit_feature_ui">UI mode</string>
 

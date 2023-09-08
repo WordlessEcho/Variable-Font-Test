@@ -20,6 +20,7 @@
     <string name="pref_category_features">特性</string>
     <string name="feature_chws">标点挤压（chws）</string>
     <string name="feature_editor">编辑字体特性设置</string>
+    <string name="add_font_feature_text">添加字体特性</string>
     <string name="edit_feature_text">文本模式</string>
     <string name="edit_feature_ui">图形界面模式</string>
 
