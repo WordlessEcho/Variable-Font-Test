@@ -348,13 +348,27 @@ class OptionsFragment: PreferenceFragmentCompat() {
                 text = fontFeatureSettings.toFeatures()
 
                 if (isVisible) {
-                    chws?.isVisible = true
+                    fontFeatures?.forEach {
+                        if (
+                            it.key != Constants.PREF_ADD_FONT_FEATURE &&
+                            it.key != Constants.PREF_EDIT_FEATURE
+                        ) {
+                            it.isVisible = true
+                        }
+                    }
 
                     editFeatures.icon =
                         ContextCompat.getDrawable(context, R.drawable.ic_baseline_edit_24)
                     editFeatures.title = getString(R.string.edit_feature_text)
                 } else {
-                    chws?.isVisible = false
+                    fontFeatures?.forEach {
+                        if (
+                            it.key != Constants.PREF_ADD_FONT_FEATURE &&
+                            it.key != Constants.PREF_EDIT_FEATURE
+                        ) {
+                            it.isVisible = false
+                        }
+                    }
 
                     editFeatures.icon =
                         ContextCompat.getDrawable(context, R.drawable.ic_baseline_build_24)
