@@ -426,8 +426,10 @@ class OptionsFragment : PreferenceFragmentCompat() {
                 if (isVisible) {
                     fontFeatures?.forEach {
                         if (
-                            it.key != Constants.PREF_ADD_FONT_FEATURE &&
-                            it.key != Constants.PREF_EDIT_FEATURE
+                            it.key !in setOf(
+                                Constants.PREF_ADD_FONT_FEATURE,
+                                Constants.PREF_EDIT_FEATURE
+                            )
                         ) {
                             it.isVisible = true
                         }
@@ -439,8 +441,10 @@ class OptionsFragment : PreferenceFragmentCompat() {
                 } else {
                     fontFeatures?.forEach {
                         if (
-                            it.key != Constants.PREF_ADD_FONT_FEATURE &&
-                            it.key != Constants.PREF_EDIT_FEATURE
+                            it.key !in setOf(
+                                Constants.PREF_ADD_FONT_FEATURE,
+                                Constants.PREF_EDIT_FEATURE
+                            )
                         ) {
                             it.isVisible = false
                         }
