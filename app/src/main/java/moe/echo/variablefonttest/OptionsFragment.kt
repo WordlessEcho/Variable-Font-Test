@@ -124,6 +124,8 @@ class OptionsFragment : PreferenceFragmentCompat() {
                         min = rawMin.toIntOrNull() ?: 0
                         max = rawMax.toIntOrNull() ?: 0
 
+                        updatesContinuously = true
+
                         setOnPreferenceChangeListener { _, newValue ->
                             val value = newValue.toString().toFloatOrNull()
 
