@@ -63,11 +63,11 @@ class OptionsFragment : PreferenceFragmentCompat() {
         // Pass null as the parent view because its going in the dialog layout
         val dialogLayout = inflater.inflate(R.layout.add_preference_dialog, null)
 
-        val spinner = dialogLayout.findViewById<Spinner>(R.id.fontFeatureType)
+        val spinner = dialogLayout.findViewById<Spinner>(R.id.tagType)
         val typeValues = resources.getStringArray(R.array.font_feature_type_values)
 
-        val seekBarMin = dialogLayout.findViewById<EditText>(R.id.fontFeatureSeekBarMin)
-        val seekBarMax = dialogLayout.findViewById<EditText>(R.id.fontFeatureSeekBarMax)
+        val seekBarMin = dialogLayout.findViewById<EditText>(R.id.tagSeekBarMin)
+        val seekBarMax = dialogLayout.findViewById<EditText>(R.id.tagSeekBarMax)
 
         ArrayAdapter.createFromResource(
             context,
@@ -103,7 +103,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
         setView(dialogLayout)
 
         setPositiveButton(android.R.string.ok) { _, _ ->
-            val tagNameEditText = dialogLayout.findViewById<EditText>(R.id.fontFeatureTagName)
+            val tagNameEditText = dialogLayout.findViewById<EditText>(R.id.tagName)
             val tagName = tagNameEditText.text.toString()
 
             val preference = when (typeValues[spinner.selectedItemPosition]) {
