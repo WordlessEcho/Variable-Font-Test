@@ -24,6 +24,16 @@
     <string name="edit_feature_text">文本模式</string>
     <string name="edit_feature_ui">图形界面模式</string>
 
+    <string name="add_font_feature_title">添加特性</string>
+    <string name="feature_type">特性类型</string>
+    <string name="feature_tag_name">特性标签名</string>
+    <string name="seek_bar_minimum">最小值</string>
+    <string name="seek_bar_maximum">最大值</string>
+
+    <string name="feature_type_switch">开关</string>
+    <string name="feature_type_seek_bar">拖动条</string>
+    <string name="feature_type_edit_text">文本</string>
+
     <string name="pref_category_about">关于</string>
     <string name="pref_source_code">源代码</string>
 

@@ -17,4 +17,16 @@
         <item>serif</item>
         <item>custom</item>
     </string-array>
+
+    <string-array name="font_feature_types">
+        <item>@string/feature_type_switch</item>
+        <item>@string/feature_type_seek_bar</item>
+        <item>@string/feature_type_edit_text</item>
+    </string-array>
+
+    <string-array name="font_feature_type_values">
+        <item>switch</item>
+        <item>seekBar</item>
+        <item>editText</item>
+    </string-array>
 </resources>

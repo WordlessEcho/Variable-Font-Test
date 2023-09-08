@@ -14,6 +14,7 @@ object Constants {
     const val VARIATION_AXIS_WIDTH = "wdth"
     const val VARIATION_AXIS_WEIGHT = "wght"
 
+    const val PREF_CATEGORY_FONT_FEATURES = "fontFeatures"
     const val FEATURE_CHWS = "chws"
 
     const val PREF_VARIATION_ITALIC = VARIATION_AXIS_ITALIC
@@ -26,5 +27,10 @@ object Constants {
 
     const val PREF_FEATURE_CHWS = FEATURE_CHWS
     const val PREF_FEATURE_EDITOR = "featureEditor"
+    const val PREF_ADD_FONT_FEATURE = "addFeature"
     const val PREF_EDIT_FEATURE = "editFeature"
+
+    const val ADD_FEATURE_TYPE_SWITCH = "switch"
+    const val ADD_FEATURE_TYPE_SEEK_BAR = "seekBar"
+    const val ADD_FEATURE_TYPE_EDIT_TEXT = "editText"
 }
