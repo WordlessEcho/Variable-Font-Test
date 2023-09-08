@@ -1,6 +1,7 @@
 package moe.echo.variablefonttest
 
 import android.app.AlertDialog
+import android.content.Context
 import android.graphics.Typeface
 import android.net.Uri
 import android.os.Build
@@ -50,6 +51,127 @@ class OptionsFragment : PreferenceFragmentCompat() {
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             if (uri != null) changeFontFromUri(uri)
         }
+
+    private fun createAddPreferenceDialog(
+        context: Context,
+        preferences: PreferenceCategory,
+        setSetting: (tagName: String, value: String) -> Unit
+    ) = AlertDialog.Builder(context).apply {
+        val inflater = requireActivity().layoutInflater
+        // https://developer.android.com/develop/ui/views/components/dialogs#CustomLayout
+        // Inflate and set the layout for the dialog
+        // Pass null as the parent view because its going in the dialog layout
+        val dialogLayout = inflater.inflate(R.layout.add_preference_dialog, null)
+
+        val spinner = dialogLayout.findViewById<Spinner>(R.id.fontFeatureType)
+        val typeValues = resources.getStringArray(R.array.font_feature_type_values)
+
+        val seekBarMin = dialogLayout.findViewById<EditText>(R.id.fontFeatureSeekBarMin)
+        val seekBarMax = dialogLayout.findViewById<EditText>(R.id.fontFeatureSeekBarMax)
+
+        ArrayAdapter.createFromResource(
+            context,
+            R.array.font_feature_types,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+            spinner.adapter = adapter
+            spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    when (typeValues[position]) {
+                        Constants.ADD_FEATURE_TYPE_SEEK_BAR -> {
+                            seekBarMin.isVisible = true
+                            seekBarMax.isVisible = true
+                        }
+                        else -> {
+                            seekBarMin.isVisible = false
+                            seekBarMax.isVisible = false
+                        }
+                    }
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) { return }
+            }
+        }
+
+        setView(dialogLayout)
+
+        setPositiveButton(android.R.string.ok) { _, _ ->
+            val tagNameEditText = dialogLayout.findViewById<EditText>(R.id.fontFeatureTagName)
+            val tagName = tagNameEditText.text.toString()
+
+            val preference = when (typeValues[spinner.selectedItemPosition]) {
+                Constants.ADD_FEATURE_TYPE_SWITCH ->
+                    SwitchPreference(preferenceScreen.context).apply {
+
+                        setOnPreferenceChangeListener { _, _ ->
+                            setSetting(tagName, if (!isChecked) "1" else "0")
+                            true
+                        }
+                    }
+                Constants.ADD_FEATURE_TYPE_SEEK_BAR -> {
+                    SeekBarPreference(preferenceScreen.context).apply {
+
+                        val rawMin = seekBarMin.text.toString()
+                        val rawMax = seekBarMax.text.toString()
+
+                        min = rawMin.toIntOrNull() ?: 0
+                        max = rawMax.toIntOrNull() ?: 0
+
+                        setOnPreferenceChangeListener { _, newValue ->
+                            val value = newValue.toString().toFloatOrNull()
+
+                            if (value != null) {
+                                setSetting(tagName, value.toString())
+                                true
+                            } else false
+                        }
+                    }
+                }
+                Constants.ADD_FEATURE_TYPE_EDIT_TEXT ->
+                    EditTextPreference(preferenceScreen.context).apply {
+                        dialogTitle = tagName
+
+                        setOnPreferenceChangeListener { _, newValue ->
+                            try {
+                                summary = newValue.toString()
+                                setSetting(tagName, newValue.toString())
+                                return@setOnPreferenceChangeListener true
+                            } catch (e: IllegalArgumentException) {
+                                Toast.makeText(
+                                    context,
+                                    e.message.toString(),
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+                            false
+                        }
+                    }
+                else -> null
+            } ?: return@setPositiveButton
+
+            try {
+                preference.apply {
+                    key = tagName
+                    title = tagName
+
+                    isPersistent = false
+                    order = 1
+                }
+                preferences.addPreference(preference)
+            } catch (e: IllegalArgumentException) {
+                // Maybe key duplication
+                Toast.makeText(context, e.message.toString(), Toast.LENGTH_LONG).show()
+            }
+        }
+        setNegativeButton(android.R.string.cancel) { _, _ -> return@setNegativeButton }
+    }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.options, rootKey)
@@ -256,132 +378,16 @@ class OptionsFragment : PreferenceFragmentCompat() {
         }
 
         addFeature?.setOnPreferenceClickListener {
-            AlertDialog.Builder(view.context).apply {
-                val inflater = requireActivity().layoutInflater
-                // https://developer.android.com/develop/ui/views/components/dialogs#CustomLayout
-                // Inflate and set the layout for the dialog
-                // Pass null as the parent view because its going in the dialog layout
-                val dialogLayout = inflater.inflate(R.layout.add_font_feature_dialog, null)
-
-                val spinner = dialogLayout.findViewById<Spinner>(R.id.fontFeatureType)
-                val typeValues = resources.getStringArray(R.array.font_feature_type_values)
-
-                val featureTagName = dialogLayout.findViewById<EditText>(R.id.fontFeatureTagName)
-                val seekBarMin = dialogLayout.findViewById<EditText>(R.id.fontFeatureSeekBarMin)
-                val seekBarMax = dialogLayout.findViewById<EditText>(R.id.fontFeatureSeekBarMax)
-
-                ArrayAdapter.createFromResource(
-                    view.context,
-                    R.array.font_feature_types,
-                    android.R.layout.simple_spinner_item
-                ).also { adapter ->
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-                    spinner.adapter = adapter
-                    spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                        override fun onItemSelected(
-                            parent: AdapterView<*>?,
-                            view: View?,
-                            position: Int,
-                            id: Long
-                        ) {
-                            when (typeValues[position]) {
-                                Constants.ADD_FEATURE_TYPE_SEEK_BAR -> {
-                                    seekBarMin.isVisible = true
-                                    seekBarMax.isVisible = true
-                                }
-                                else -> {
-                                    seekBarMin.isVisible = false
-                                    seekBarMax.isVisible = false
-                                }
-                            }
-                        }
-
-                        override fun onNothingSelected(parent: AdapterView<*>?) { return }
-                    }
+            if (fontFeatures != null) {
+                createAddPreferenceDialog(view.context, fontFeatures) { tagName, value ->
+                    fontFeatureSettings[tagName] = value
+                    previewContent.fontFeatureSettings = fontFeatureSettings.toFeatures()
+                }.apply {
+                    setTitle(R.string.add_font_feature_title)
+                    show()
                 }
-
-                setView(dialogLayout)
-                setTitle(R.string.add_font_feature_title)
-                setPositiveButton(android.R.string.ok) { _, _ ->
-                    val tagName = featureTagName.text.toString()
-
-                    val preference = when (typeValues[spinner.selectedItemPosition]) {
-                        Constants.ADD_FEATURE_TYPE_SWITCH ->
-                            SwitchPreference(preferenceScreen.context).apply {
-
-                                setOnPreferenceChangeListener { _, _ ->
-                                    fontFeatureSettings[tagName] = if (!isChecked) "1" else "0"
-                                    previewContent.fontFeatureSettings =
-                                        fontFeatureSettings.toFeatures()
-                                    true
-                                }
-                            }
-                        Constants.ADD_FEATURE_TYPE_SEEK_BAR -> {
-                            SeekBarPreference(preferenceScreen.context).apply {
-
-                                val rawMin = seekBarMin.text.toString()
-                                val rawMax = seekBarMax.text.toString()
-
-                                min = rawMin.toIntOrNull() ?: 0
-                                max = rawMax.toIntOrNull() ?: 0
-
-                                setOnPreferenceChangeListener { _, newValue ->
-                                    val value = newValue.toString().toFloatOrNull()
-
-                                    if (value != null) {
-                                        fontFeatureSettings[tagName] = value.toString()
-                                        previewContent.fontFeatureSettings =
-                                            fontFeatureSettings.toFeatures()
-                                        true
-                                    } else false
-                                }
-                            }
-                        }
-                        Constants.ADD_FEATURE_TYPE_EDIT_TEXT ->
-                            EditTextPreference(preferenceScreen.context).apply {
-                                dialogTitle = tagName
-
-                                setOnPreferenceChangeListener { _, newValue ->
-                                    try {
-                                        summary = newValue.toString()
-                                        fontFeatureSettings[tagName] = newValue.toString()
-                                        previewContent.fontFeatureSettings =
-                                            fontFeatureSettings.toFeatures()
-                                        return@setOnPreferenceChangeListener true
-                                    } catch (e: IllegalArgumentException) {
-                                        Toast.makeText(
-                                            context,
-                                            e.message.toString(),
-                                            Toast.LENGTH_LONG
-                                        ).show()
-                                    }
-                                    false
-                                }
-                            }
-                        else -> null
-                    } ?: return@setPositiveButton
-
-                    try {
-                        preference.apply {
-                            key = tagName
-                            title = tagName
-
-                            isPersistent = false
-                            order = 1
-                        }
-                        fontFeatures?.addPreference(preference)
-                    } catch (e: IllegalArgumentException) {
-                        // Maybe key duplication
-                        Toast.makeText(view.context, e.message.toString(), Toast.LENGTH_LONG).show()
-                    }
-                }
-                setNegativeButton(android.R.string.cancel) { _, _ -> return@setNegativeButton }
-
-                show()
-            }
-
-            true
+                true
+            } else false
         }
 
         editFeatures?.setOnPreferenceClickListener {
