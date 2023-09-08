@@ -9,7 +9,9 @@
     <string name="text_size">字号</string>
     <string name="font_family">字族</string>
     <string name="choose_font">选择字体</string>
+    <string name="font_import_failed">字体导入失败</string>
 
+    <string name="unsupported_android">Android 8.0以上版本可调整</string>
     <string name="pref_category_variation">可变</string>
     <string name="variation_width">字宽</string>
     <string name="variation_weight">字重</string>

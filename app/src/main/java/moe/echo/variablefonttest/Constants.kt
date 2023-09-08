@@ -8,6 +8,7 @@ object Constants {
 
     const val OPTION_CUSTOM_VALUE = "custom"
 
+    const val PREF_CATEGORY_VARIATION = "variation"
     const val VARIATION_AXIS_ITALIC = "ital"
     const val VARIATION_AXIS_OPTICAL_SIZE = "opsz"
     const val VARIATION_AXIS_SLANT = "slnt"
@@ -17,6 +18,7 @@ object Constants {
     const val PREF_CATEGORY_FONT_FEATURES = "fontFeatures"
     const val FEATURE_CHWS = "chws"
 
+    const val PREF_UNSUPPORTED_ANDROID = "unsupportedAndroid"
     const val PREF_VARIATION_ITALIC = VARIATION_AXIS_ITALIC
     const val PREF_VARIATION_OPTICAL_SIZE = VARIATION_AXIS_OPTICAL_SIZE
     const val PREF_VARIATION_SLANT = VARIATION_AXIS_SLANT

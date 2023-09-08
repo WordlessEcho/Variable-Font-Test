@@ -6,7 +6,7 @@ plugins {
 android {
     defaultConfig {
         applicationId "moe.echo.variablefonttest"
-        minSdkVersion 28
+        minSdk 21
         compileSdk 33
         targetSdk 33
         versionCode 12

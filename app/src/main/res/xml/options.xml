@@ -31,7 +31,8 @@
             android:title="@string/ttc_index"
             app:useSimpleSummaryProvider="true"
             android:defaultValue="0"
-            android:persistent="false" />
+            android:persistent="false"
+            android:enabled="false" />
 
         <Preference
             android:key="customFont"
@@ -45,7 +46,14 @@
     <!-- https://fonts.google.com/variablefonts#axis-definitions -->
     <PreferenceCategory
         android:key="variation"
-        android:title="@string/pref_category_variation">
+        android:title="@string/pref_category_variation"
+        android:enabled="false" >
+
+        <Preference
+            android:key="unsupportedAndroid"
+            app:isPreferenceVisible="true"
+            android:enabled="false"
+            android:title="@string/unsupported_android" />
 
         <SeekBarPreference
             android:key="ital"

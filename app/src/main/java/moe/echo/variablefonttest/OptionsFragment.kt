@@ -3,8 +3,10 @@ package moe.echo.variablefonttest
 import android.app.AlertDialog
 import android.graphics.Typeface
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -14,8 +16,30 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.preference.*
+import androidx.preference.EditTextPreference
+import androidx.preference.Preference
+import androidx.preference.PreferenceCategory
+import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SeekBarPreference
+import androidx.preference.SwitchPreference
+import androidx.preference.SwitchPreferenceCompat
+import androidx.preference.forEach
 import rikka.preference.SimpleMenuPreference
+import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
+import kotlin.collections.MutableMap
+import kotlin.collections.contains
+import kotlin.collections.filter
+import kotlin.collections.get
+import kotlin.collections.joinToString
+import kotlin.collections.mutableMapOf
+import kotlin.collections.set
+import kotlin.collections.toList
+import kotlin.collections.toMap
+import kotlin.collections.zip
+
+private const val TAG = "OptionsFragment"
 
 class OptionsFragment : PreferenceFragmentCompat() {
 
@@ -51,6 +75,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
         val ttcIndex: EditTextPreference? = findPreference(Constants.PREF_TTC_INDEX)
         val customFont: Preference? = findPreference(Constants.PREF_CUSTOM_FONT)
 
+        val variation = findPreference<PreferenceCategory>(Constants.PREF_CATEGORY_VARIATION)
         val ital: SeekBarPreference? = findPreference(Constants.PREF_VARIATION_ITALIC)
         val opsz: SeekBarPreference? = findPreference(Constants.PREF_VARIATION_OPTICAL_SIZE)
         val slnt: SeekBarPreference? = findPreference(Constants.PREF_VARIATION_SLANT)
@@ -64,6 +89,19 @@ class OptionsFragment : PreferenceFragmentCompat() {
         val featureEditor: EditTextPreference? = findPreference(Constants.PREF_FEATURE_EDITOR)
         val addFeature: Preference? = findPreference(Constants.PREF_ADD_FONT_FEATURE)
         val editFeatures: Preference? = findPreference(Constants.PREF_EDIT_FEATURE)
+
+        fun setVariation(settings: String) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                previewContent.fontVariationSettings = settings
+            }
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            variation?.isEnabled = true
+
+            val unsupportedAndroid = findPreference<Preference>(Constants.PREF_UNSUPPORTED_ANDROID)
+            unsupportedAndroid?.isVisible = false
+        }
 
         ttcIndex?.setOnBindEditTextListener { editText ->
             editText.inputType = InputType.TYPE_CLASS_NUMBER
@@ -87,12 +125,15 @@ class OptionsFragment : PreferenceFragmentCompat() {
                     customFont?.isVisible = false
                     ttcIndex?.isVisible = false
                     previewContent.typeface = valueToTypeface[newValue]
-                    previewContent.fontVariationSettings = fontVariationSettings.toFeatures()
+                    setVariation(fontVariationSettings.toFeatures())
                     true
                 }
                 newValue == Constants.OPTION_CUSTOM_VALUE -> {
                     customFont?.isVisible = true
                     ttcIndex?.isVisible = true
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        ttcIndex?.isEnabled = true
+                    }
                     true
                 }
                 else -> false
@@ -110,7 +151,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
 
             if (value != null) {
                 fontVariationSettings[Constants.VARIATION_AXIS_ITALIC] = (value / 10).toString()
-                previewContent.fontVariationSettings = fontVariationSettings.toFeatures()
+                setVariation(fontVariationSettings.toFeatures())
                 true
             } else false
         }
@@ -120,7 +161,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
 
             if (value != null) {
                 fontVariationSettings[Constants.VARIATION_AXIS_OPTICAL_SIZE] = (value / 10).toString()
-                previewContent.fontVariationSettings = fontVariationSettings.toFeatures()
+                setVariation(fontVariationSettings.toFeatures())
                 true
             } else false
         }
@@ -130,7 +171,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
 
             if (value != null) {
                 fontVariationSettings[Constants.VARIATION_AXIS_SLANT] = (value - 90).toString()
-                previewContent.fontVariationSettings = fontVariationSettings.toFeatures()
+                setVariation(fontVariationSettings.toFeatures())
                 true
             } else false
         }
@@ -140,7 +181,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
 
             if (value != null) {
                 fontVariationSettings[Constants.VARIATION_AXIS_WIDTH] = (value / 10).toString()
-                previewContent.fontVariationSettings = fontVariationSettings.toFeatures()
+                setVariation(fontVariationSettings.toFeatures())
                 true
             } else false
         }
@@ -150,14 +191,14 @@ class OptionsFragment : PreferenceFragmentCompat() {
 
             if (value != null) {
                 fontVariationSettings[Constants.VARIATION_AXIS_WEIGHT] = value.toString()
-                previewContent.fontVariationSettings = fontVariationSettings.toFeatures()
+                setVariation(fontVariationSettings.toFeatures())
                 true
             } else false
         }
 
         variationEditor?.setOnPreferenceChangeListener { _, newValue ->
             try {
-                previewContent.fontVariationSettings = newValue.toString()
+                setVariation(fontVariationSettings.toFeatures())
                 return@setOnPreferenceChangeListener true
             } catch (e: IllegalArgumentException) {
                 Toast.makeText(context, e.message.toString(), Toast.LENGTH_LONG).show()
@@ -385,20 +426,77 @@ class OptionsFragment : PreferenceFragmentCompat() {
     private fun MutableMap<String, String>.toFeatures(): String =
         this.toList().joinToString { "'${it.first}' ${it.second}" }
 
+    private fun copyStreamToFile(inputStream: InputStream, outputFile: File) {
+        inputStream.use { input ->
+            val outputStream = FileOutputStream(outputFile)
+            outputStream.use { output ->
+                val buffer = ByteArray(4 * 1024) // buffer size
+                while (true) {
+                    val byteCount = input.read(buffer)
+                    if (byteCount < 0) break
+                    output.write(buffer, 0, byteCount)
+                }
+                output.flush()
+            }
+        }
+    }
+
     private fun changeFontFromUri(uri: Uri) {
         activity?.runOnUiThread {
             val previewContent: EditText? = parentFragment?.view?.findViewById(R.id.preview_content)
-            val ttcIndex: EditTextPreference? = findPreference(Constants.PREF_TTC_INDEX)
 
-            if (uri.path != null) {
-                activity?.contentResolver?.openFileDescriptor(uri, "r")?.apply {
-                    val builder = Typeface.Builder(fileDescriptor)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val ttcIndex: EditTextPreference? = findPreference(Constants.PREF_TTC_INDEX)
+
+                activity?.contentResolver?.openFileDescriptor(uri, "r")?.use {
+                    val builder = Typeface.Builder(it.fileDescriptor)
                     builder.setFontVariationSettings(fontVariationSettings.toFeatures())
                     builder.setTtcIndex(ttcIndex?.text?.toInt() ?: 0)
                     previewContent?.typeface = builder.build()
-                    close()
+                    return@runOnUiThread
+                } ?: {
+                    Log.w(TAG, "changeFontFromUri: Failed to set font.")
+                    Log.w(TAG, "changeFontFromUri: Uri: $uri")
+                    Log.w(TAG, "changeFontFromUri: Uri?.path: ${uri.path}")
+                    Log.w(TAG, "changeFontFromUri: activity == null? ${activity == null}")
+                    Log.w(
+                        TAG,
+                        "changeFontFromUri: activity?.contentResolver == null? ${activity?.contentResolver == null}"
+                    )
+                }
+            } else {
+                val path = uri.path
+                val cacheDir = context?.cacheDir
+
+                if (path != null && cacheDir != null) {
+                    val filename = path.substring(path.lastIndexOf("/"))
+                    val font = File(cacheDir, filename)
+
+                    val inputStream = activity?.contentResolver?.openInputStream(uri)
+
+                    if (inputStream != null) {
+                        copyStreamToFile(inputStream, font)
+                        previewContent?.typeface = Typeface.createFromFile(font)
+                        return@runOnUiThread
+                    } else {
+                        Log.w(TAG, "changeFontFromUri: Failed to openInputStream to set font.")
+                        Log.w(TAG, "changeFontFromUri: Uri: $uri")
+                        Log.w(TAG, "changeFontFromUri: Uri?.path: $path")
+                        Log.w(TAG, "changeFontFromUri: context?.cacheDir: $cacheDir")
+                        Log.w(TAG, "changeFontFromUri: activity == null? ${activity == null}")
+                        Log.w(
+                            TAG,
+                            "changeFontFromUri: activity?.contentResolver == null? ${activity?.contentResolver == null}"
+                        )
+                    }
+                } else {
+                    Log.w(TAG, "changeFontFromUri: Failed to set font.")
+                    Log.w(TAG, "changeFontFromUri: Uri: $uri")
+                    Log.w(TAG, "changeFontFromUri: path: $path, context?.cacheDir: $cacheDir")
                 }
             }
+
+            Toast.makeText(context, R.string.font_import_failed, Toast.LENGTH_LONG).show()
         }
     }
 }
