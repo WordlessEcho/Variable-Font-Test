@@ -48,6 +48,7 @@
     <string name="feature_tag_name">Feature tag name</string>
     <string name="seek_bar_minimum">Minimum value</string>
     <string name="seek_bar_maximum">Maximum value</string>
+    <string name="seek_bar_step">Step value</string>
 
     <string name="feature_type_switch">Switch</string>
     <string name="feature_type_seek_bar">SeekBar</string>

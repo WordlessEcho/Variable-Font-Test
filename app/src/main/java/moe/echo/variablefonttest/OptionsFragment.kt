@@ -39,6 +39,8 @@ import kotlin.collections.set
 import kotlin.collections.toList
 import kotlin.collections.toMap
 import kotlin.collections.zip
+import kotlin.math.abs
+import kotlin.math.pow
 
 private const val TAG = "OptionsFragment"
 
@@ -68,6 +70,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
 
         val seekBarMin = dialogLayout.findViewById<EditText>(R.id.tagSeekBarMin)
         val seekBarMax = dialogLayout.findViewById<EditText>(R.id.tagSeekBarMax)
+        val seekBarStep = dialogLayout.findViewById<EditText>(R.id.tagSeekBarStep)
 
         ArrayAdapter.createFromResource(
             context,
@@ -88,10 +91,12 @@ class OptionsFragment : PreferenceFragmentCompat() {
                         Constants.ADD_FEATURE_TYPE_SEEK_BAR -> {
                             seekBarMin.isVisible = true
                             seekBarMax.isVisible = true
+                            seekBarStep.isVisible = true
                         }
                         else -> {
                             seekBarMin.isVisible = false
                             seekBarMax.isVisible = false
+                            seekBarStep.isVisible = false
                         }
                     }
                 }
@@ -117,12 +122,49 @@ class OptionsFragment : PreferenceFragmentCompat() {
                     }
                 Constants.ADD_FEATURE_TYPE_SEEK_BAR -> {
                     SeekBarPreference(preferenceScreen.context).apply {
-
                         val rawMin = seekBarMin.text.toString()
                         val rawMax = seekBarMax.text.toString()
+                        val rawStep = seekBarStep.text.toString()
 
-                        min = rawMin.toIntOrNull() ?: 0
-                        max = rawMax.toIntOrNull() ?: 0
+                        val minSetting = rawMin.toFloatOrNull() ?: 0F
+                        val maxSetting = rawMax.toFloatOrNull() ?: 0F
+                        val minimum = minSetting.coerceAtMost(maxSetting)
+                        val maximum = minSetting.coerceAtLeast(maxSetting)
+                        val step = rawStep.toFloatOrNull() ?: 0F
+
+                        var offset = 0F
+                        var multiplier = 1F
+
+                        val allNegative = minSetting < 0 && maxSetting < 0
+
+                        if (allNegative) {
+                            multiplier *= -1
+                        }
+
+                        if (rawStep.contains(".")) {
+                            val decimalWithDotLength = rawStep
+                                .substring(rawStep.indexOf("."))
+                                .length
+
+                            if (decimalWithDotLength > 1) {
+                                multiplier *= 10F.pow(decimalWithDotLength - 1)
+                            }
+                        }
+
+                        if (!allNegative && minimum < 0) {
+                            offset += abs(minimum) * multiplier
+                        }
+
+                        min = ((minimum + offset) * multiplier).toInt()
+                        max = ((maximum + offset) * multiplier).toInt()
+                        seekBarIncrement = ((step + offset) * multiplier).toInt()
+
+                        Log.i(TAG, "createAddPreferenceDialog: $tagName: seekBar.min: $min")
+                        Log.i(TAG, "createAddPreferenceDialog: $tagName: seekBar.max: $max")
+                        Log.i(
+                            TAG,
+                            "createAddPreferenceDialog: $tagName: seekBar.seekBarIncrement: $seekBarIncrement"
+                        )
 
                         updatesContinuously = true
 
@@ -130,7 +172,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
                             val value = newValue.toString().toFloatOrNull()
 
                             if (value != null) {
-                                setSetting(tagName, value.toString())
+                                setSetting(tagName, ((value - offset) / multiplier).toString())
                                 true
                             } else false
                         }

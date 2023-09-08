@@ -27,7 +27,7 @@
 
     <EditText
         android:id="@+id/tagSeekBarMin"
-        android:inputType="number"
+        android:inputType="numberDecimal|numberSigned"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -40,7 +40,7 @@
 
     <EditText
         android:id="@+id/tagSeekBarMax"
-        android:inputType="number"
+        android:inputType="numberDecimal|numberSigned"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -48,6 +48,19 @@
         android:layout_marginRight="18dp"
         android:layout_marginBottom="4dp"
         android:hint="@string/seek_bar_maximum"
+        android:visibility="gone"
+        android:autofillHints="no" />
+
+    <EditText
+        android:id="@+id/tagSeekBarStep"
+        android:inputType="numberDecimal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="4dp"
+        android:hint="@string/seek_bar_step"
         android:visibility="gone"
         android:autofillHints="no" />
 
