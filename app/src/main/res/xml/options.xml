@@ -135,7 +135,7 @@
 
         <Preference
             android:key="addFeature"
-            android:title="@string/add_font_feature_text"
+            android:title="@string/add_font_feature"
             android:icon="@drawable/baseline_add_24" />
 
         <Preference
