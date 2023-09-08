@@ -162,7 +162,10 @@ class OptionsFragment : PreferenceFragmentCompat() {
                     title = tagName
 
                     isPersistent = false
-                    order = 1
+                    // Divide 1 for index
+                    // Divide 2 to make new preference appear before
+                    // "Add variation / feature" and "Edit variation / feature"
+                    order = preferences.preferenceCount - 1 - 2
                 }
                 preferences.addPreference(preference)
             } catch (e: IllegalArgumentException) {
