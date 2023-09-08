@@ -128,6 +128,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
 
                         val minSetting = rawMin.toFloatOrNull() ?: 0F
                         val maxSetting = rawMax.toFloatOrNull() ?: 0F
+
                         val minimum = minSetting.coerceAtMost(maxSetting)
                         val maximum = minSetting.coerceAtLeast(maxSetting)
                         val step = rawStep.toFloatOrNull() ?: 0F
@@ -135,9 +136,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
                         var offset = 0F
                         var multiplier = 1F
 
-                        val allNegative = minSetting < 0 && maxSetting < 0
-
-                        if (allNegative) {
+                        if (maximum < 0) {
                             multiplier *= -1
                         }
 
@@ -151,13 +150,21 @@ class OptionsFragment : PreferenceFragmentCompat() {
                             }
                         }
 
-                        if (!allNegative && minimum < 0) {
+                        if (maximum >= 0 && minimum < 0) {
                             offset += abs(minimum) * multiplier
                         }
 
-                        min = ((minimum + offset) * multiplier).toInt()
-                        max = ((maximum + offset) * multiplier).toInt()
-                        seekBarIncrement = ((step + offset) * multiplier).toInt()
+                        min = (minimum * multiplier + offset).toInt()
+                        max = (maximum * multiplier + offset).toInt()
+                        seekBarIncrement = (step * abs(multiplier)).toInt()
+                        setDefaultValue((0F + offset).toInt())
+
+                        Log.i(TAG, "createAddPreferenceDialog: $tagName: minimum: $minimum")
+                        Log.i(TAG, "createAddPreferenceDialog: $tagName: maximum: $maximum")
+                        Log.i(TAG, "createAddPreferenceDialog: $tagName: step: $step")
+
+                        Log.i(TAG, "createAddPreferenceDialog: $tagName: offset: $offset")
+                        Log.i(TAG, "createAddPreferenceDialog: $tagName: multiplier: $multiplier")
 
                         Log.i(TAG, "createAddPreferenceDialog: $tagName: seekBar.min: $min")
                         Log.i(TAG, "createAddPreferenceDialog: $tagName: seekBar.max: $max")
