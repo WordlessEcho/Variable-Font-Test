@@ -56,7 +56,7 @@
             android:title="@string/unsupported_android" />
 
         <SeekBarPreference
-            android:key="ital"
+            android:key="italAxis"
             android:title="@string/variation_italic"
             app:min="0"
             android:max="10"
@@ -65,7 +65,7 @@
             android:persistent="false" />
 
         <SeekBarPreference
-            android:key="opsz"
+            android:key="opszAxis"
             android:title="@string/variation_optical_size"
             app:min="1"
             android:max="1440"
@@ -74,7 +74,7 @@
             android:persistent="false" />
 
         <SeekBarPreference
-            android:key="slnt"
+            android:key="slntAxis"
             android:title="@string/variation_slant"
             app:min="0"
             android:max="180"
@@ -83,7 +83,7 @@
             android:persistent="false" />
 
         <SeekBarPreference
-            android:key="wdth"
+            android:key="wdthAxis"
             android:title="@string/variation_width"
             app:min="0"
             android:max="2000"
@@ -92,7 +92,7 @@
             android:persistent="false" />
 
         <SeekBarPreference
-            android:key="wght"
+            android:key="wghtAxis"
             android:title="@string/variation_weight"
             app:min="1"
             android:max="1000"
@@ -126,7 +126,7 @@
         android:title="@string/pref_category_features">
 
         <SwitchPreferenceCompat
-            android:key="chws"
+            android:key="chwsFeature"
             android:title="@string/feature_chws"
             android:defaultValue="false"
             android:persistent="false" />
