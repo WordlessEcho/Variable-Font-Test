@@ -350,21 +350,33 @@ class OptionsFragment : PreferenceFragmentCompat() {
                 text = fontVariationSettings.toFeatures()
 
                 if (isVisible) {
-                    ital?.isVisible = true
-                    opsz?.isVisible = true
-                    slnt?.isVisible = true
-                    wdth?.isVisible = true
-                    wght?.isVisible = true
+                    variation?.forEach {
+                        if (
+                            it.key !in setOf(
+                                Constants.PREF_ADD_FONT_VARIATION,
+                                Constants.PREF_EDIT_VARIATION,
+                                Constants.PREF_UNSUPPORTED_ANDROID
+                            )
+                        ) {
+                            it.isVisible = true
+                        }
+                    }
 
                     editVariation.icon =
                         ContextCompat.getDrawable(context, R.drawable.ic_baseline_edit_24)
                     editVariation.title = getString(R.string.edit_variation_text)
                 } else {
-                    ital?.isVisible = false
-                    opsz?.isVisible = false
-                    slnt?.isVisible = false
-                    wdth?.isVisible = false
-                    wght?.isVisible = false
+                    variation?.forEach {
+                        if (
+                            it.key !in setOf(
+                                Constants.PREF_ADD_FONT_VARIATION,
+                                Constants.PREF_EDIT_VARIATION,
+                                Constants.PREF_UNSUPPORTED_ANDROID
+                            )
+                        ) {
+                            it.isVisible = false
+                        }
+                    }
 
                     editVariation.icon =
                         ContextCompat.getDrawable(context, R.drawable.ic_baseline_build_24)
