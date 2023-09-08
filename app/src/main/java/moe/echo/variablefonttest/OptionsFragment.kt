@@ -207,22 +207,22 @@ class OptionsFragment : PreferenceFragmentCompat() {
                 else -> null
             } ?: return@setPositiveButton
 
-            try {
-                preference.apply {
-                    key = tagName
-                    title = tagName
+            preference.apply {
+                key = tagName
+                title = tagName
 
-                    isPersistent = false
-                    // Divide 1 for index
-                    // Divide 2 to make new preference appear before
-                    // "Add variation / feature" and "Edit variation / feature"
-                    order = preferences.preferenceCount - 1 - 2
-                }
-                preferences.addPreference(preference)
-            } catch (e: IllegalArgumentException) {
-                // Maybe key duplication
-                Toast.makeText(context, e.message.toString(), Toast.LENGTH_LONG).show()
+                isPersistent = false
+                // Divide 1 for index
+                // Divide 2 to make new preference appear before
+                // "Add variation / feature" and "Edit variation / feature"
+                order = preferences.preferenceCount - 1 - 2
             }
+
+            val duplicateKeyPreference = findPreference<Preference>(tagName)
+            if (duplicateKeyPreference != null) {
+                preferences.removePreference(duplicateKeyPreference)
+            }
+            preferences.addPreference(preference)
         }
         setNegativeButton(android.R.string.cancel) { _, _ -> return@setNegativeButton }
     }
