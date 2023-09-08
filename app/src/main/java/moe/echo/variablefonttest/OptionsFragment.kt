@@ -383,7 +383,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
                     fontFeatureSettings[tagName] = value
                     previewContent.fontFeatureSettings = fontFeatureSettings.toFeatures()
                 }.apply {
-                    setTitle(R.string.add_font_feature_title)
+                    setTitle(R.string.add_font_feature_text)
                     show()
                 }
                 true
