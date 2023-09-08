@@ -548,12 +548,10 @@ class OptionsFragment : PreferenceFragmentCompat() {
                     )
                 }
             } else {
-                val path = uri.path
                 val cacheDir = context?.cacheDir
 
-                if (path != null && cacheDir != null) {
-                    val filename = path.substring(path.lastIndexOf("/"))
-                    val font = File(cacheDir, filename)
+                if (cacheDir != null) {
+                    val font = File.createTempFile("font", "ByVFT")
 
                     val inputStream = activity?.contentResolver?.openInputStream(uri)
 
@@ -564,7 +562,6 @@ class OptionsFragment : PreferenceFragmentCompat() {
                     } else {
                         Log.w(TAG, "changeFontFromUri: Failed to openInputStream to set font.")
                         Log.w(TAG, "changeFontFromUri: Uri: $uri")
-                        Log.w(TAG, "changeFontFromUri: Uri?.path: $path")
                         Log.w(TAG, "changeFontFromUri: context?.cacheDir: $cacheDir")
                         Log.w(TAG, "changeFontFromUri: activity == null? ${activity == null}")
                         Log.w(
@@ -575,7 +572,6 @@ class OptionsFragment : PreferenceFragmentCompat() {
                 } else {
                     Log.w(TAG, "changeFontFromUri: Failed to set font.")
                     Log.w(TAG, "changeFontFromUri: Uri: $uri")
-                    Log.w(TAG, "changeFontFromUri: path: $path, context?.cacheDir: $cacheDir")
                 }
             }
 
