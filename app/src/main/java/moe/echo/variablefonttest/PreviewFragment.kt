@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 
-class PreviewFragment: Fragment(R.layout.preview_fragment) {
+class PreviewFragment : Fragment(R.layout.preview_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

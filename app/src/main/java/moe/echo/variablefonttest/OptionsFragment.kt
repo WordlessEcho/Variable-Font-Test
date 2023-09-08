@@ -17,7 +17,7 @@ import androidx.core.view.isVisible
 import androidx.preference.*
 import rikka.preference.SimpleMenuPreference
 
-class OptionsFragment: PreferenceFragmentCompat() {
+class OptionsFragment : PreferenceFragmentCompat() {
 
     private val fontVariationSettings = mutableMapOf<String, String>()
     private val fontFeatureSettings = mutableMapOf<String, String>()
