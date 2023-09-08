@@ -136,27 +136,25 @@ class OptionsFragment : PreferenceFragmentCompat() {
                         var offset = 0F
                         var multiplier = 1F
 
-                        if (maximum < 0) {
-                            multiplier *= -1
-                        }
-
                         if (rawStep.contains(".")) {
-                            val decimalWithDotLength = rawStep
+                            val decimalWithDot = rawStep
                                 .substring(rawStep.indexOf("."))
-                                .length
+                            val decimalWithDotLength = decimalWithDot.length
 
                             if (decimalWithDotLength > 1) {
-                                multiplier *= 10F.pow(decimalWithDotLength - 1)
+                                if (decimalWithDot.substring(1).toInt() > 0) {
+                                    multiplier *= 10F.pow(decimalWithDotLength - 1)
+                                }
                             }
                         }
 
-                        if (maximum >= 0 && minimum < 0) {
-                            offset += abs(minimum) * multiplier
+                        if (minimum < 0) {
+                            offset += abs(minimum)
                         }
 
-                        min = (minimum * multiplier + offset).toInt()
-                        max = (maximum * multiplier + offset).toInt()
-                        seekBarIncrement = (step * abs(multiplier)).toInt()
+                        min = ((minimum + offset) * multiplier).toInt()
+                        max = ((maximum + offset) * multiplier).toInt()
+                        seekBarIncrement = (step * multiplier).toInt()
 
                         Log.i(TAG, "createAddPreferenceDialog: $tagName: minimum: $minimum")
                         Log.i(TAG, "createAddPreferenceDialog: $tagName: maximum: $maximum")
@@ -178,7 +176,10 @@ class OptionsFragment : PreferenceFragmentCompat() {
                             val value = newValue.toString().toFloatOrNull()
 
                             if (value != null) {
-                                setSetting(tagName, ((value - offset) / multiplier).toString())
+                                setSetting(
+                                    tagName,
+                                    ((value - offset * multiplier) / multiplier).toString()
+                                )
                                 true
                             } else false
                         }
