@@ -157,7 +157,6 @@ class OptionsFragment : PreferenceFragmentCompat() {
                         min = (minimum * multiplier + offset).toInt()
                         max = (maximum * multiplier + offset).toInt()
                         seekBarIncrement = (step * abs(multiplier)).toInt()
-                        setDefaultValue((0F + offset).toInt())
 
                         Log.i(TAG, "createAddPreferenceDialog: $tagName: minimum: $minimum")
                         Log.i(TAG, "createAddPreferenceDialog: $tagName: maximum: $maximum")
