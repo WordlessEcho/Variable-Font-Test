@@ -15,7 +15,7 @@ object Constants {
     const val VARIATION_AXIS_WEIGHT = "wght"
 
     const val PREF_CATEGORY_FONT_FEATURES = "fontFeatures"
-    const val FEATURE_CHWS = "chwsFeature"
+    const val FEATURE_CHWS = "chws"
 
     const val PREF_CATEGORY_VARIATIONS = "variations"
     const val PREF_UNSUPPORTED_ANDROID = "unsupportedAndroid"
