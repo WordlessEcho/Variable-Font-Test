@@ -263,6 +263,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
 
         val fontFeatures = findPreference<PreferenceCategory>(Constants.PREF_CATEGORY_FONT_FEATURES)
         val chws: SwitchPreferenceCompat? = findPreference(Constants.PREF_FEATURE_CHWS)
+        val halt: SwitchPreferenceCompat? = findPreference(Constants.PREF_FEATURE_HALT)
         val featureEditor: EditTextPreference? = findPreference(Constants.PREF_FEATURE_EDITOR)
         val addFeature: Preference? = findPreference(Constants.PREF_ADD_FONT_FEATURE)
         val editFeatures: Preference? = findPreference(Constants.PREF_EDIT_FEATURE)
@@ -447,6 +448,19 @@ class OptionsFragment : PreferenceFragmentCompat() {
 
             setOnPreferenceChangeListener { _, _ ->
                 fontFeatureSettings[Constants.FEATURE_CHWS] = if (!isChecked) "1" else "0"
+                previewContent.fontFeatureSettings = fontFeatureSettings.toFeatures()
+                true
+            }
+        }
+
+        halt?.apply {
+            summary = String.format(
+                getString(R.string.mojikumi_description),
+                Constants.FEATURE_HALT
+            )
+
+            setOnPreferenceChangeListener { _, _ ->
+                fontFeatureSettings[Constants.FEATURE_HALT] = if (!isChecked) "1" else "0"
                 previewContent.fontFeatureSettings = fontFeatureSettings.toFeatures()
                 true
             }

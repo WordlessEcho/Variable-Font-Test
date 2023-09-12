@@ -131,6 +131,12 @@
             android:defaultValue="false"
             android:persistent="false" />
 
+        <SwitchPreferenceCompat
+            android:key="haltFeature"
+            android:title="@string/feature_halt"
+            android:defaultValue="false"
+            android:persistent="false" />
+
         <EditTextPreference
             android:key="featureEditor"
             android:title="@string/feature_editor"
