@@ -1,10 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="default_preview">（Click here to input any text you want to see.）這句話後來演變成「飲水思源」這個成語，意為喝水的時候想一想流水的源頭，比喻不忘本。</string>
+    <string name="app_name">可變字型測試器</string>
+    <string name="default_preview">（點此處輸入您想查看的任何文字。）這句話後來演變成「飲水思源」這個成語，意為喝水的時候想一想流水的源頭，比喻不忘本。</string>
+    <string name="input_hint_for_preview">輸入一些您想查看的文字。</string>
+    <string name="expand_options">展開選項</string>
+
+    <string name="pref_category_normal">一般</string>
+    <string name="text_size">文字大小</string>
+    <string name="font_family">字型家族</string>
+    <string name="choose_font">選擇字型</string>
+    <string name="ttc_index">TTC 索引</string>
+    <string name="font_import_failed">字型導入失敗</string>
+
+    <string name="pref_category_variations">可變</string>
+    <string name="unsupported_android">適用於 Android 8.0+</string>
+    <string name="variation_italic">斜體</string>
+    <string name="variation_optical_size">光學尺寸</string>
+    <string name="variation_slant">傾斜</string>
+    <string name="variation_width">字寬</string>
+    <string name="variation_weight">字重</string>
+    <string name="variation_editor">新增可變設定</string>
+    <string name="add_font_variation">新增可變字型</string>
+    <string name="edit_variation_text">文字模式</string>
+    <string name="edit_variation_ui">UI 模式</string>
+
+    <string name="pref_category_features">特性</string>
+    <string name="feature_chws">排字間距調整</string>
+    <string name="feature_editor">編輯特性</string>
+    <string name="add_font_feature">新增字型特性</string>
+    <string name="edit_feature_text">文字模式</string>
+    <string name="edit_feature_ui">UI 模式</string>
+
+    <string name="pref_category_about">關於</string>
+    <string name="pref_source_code">原始碼</string>
 
     <string name="font_family_default">預設</string>
-    <string name="default_bold">粗體預設</string>
-    <string name="monospaced">固定寬度</string>
+    <string name="default_bold">預設粗體</string>
+    <string name="monospaced">等寬</string>
     <string name="sans_serif">無襯線</string>
     <string name="serif">襯線</string>
+    <string name="custom_font">自訂</string>
+
+    <string name="tag_name">標籤名稱</string>
+    <string name="tag_seek_bar_minimum">最小值</string>
+    <string name="tag_seek_bar_maximum">最大值</string>
+    <string name="tag_seek_bar_step">滑動條間隔</string>
+
+    <string name="feature_type_switch">開關</string>
+    <string name="feature_type_seek_bar">滑動條</string>
+    <string name="feature_type_edit_text">文字</string>
 </resources>
