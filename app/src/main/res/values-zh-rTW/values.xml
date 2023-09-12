@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">可變字型測試器</string>
+    <string name="project_translators" translatable="false">
+        https://github.com/WordlessEcho/Variable-Font-Test/blob/main/TRANSLATORS.md#zh-rTW
+    </string>
+
     <string name="default_preview">（點此處輸入您想查看的任何文字。）這句話後來演變成「飲水思源」這個成語，意為喝水的時候想一想流水的源頭，比喻不忘本。</string>
     <string name="input_hint_for_preview">輸入一些您想查看的文字。</string>
     <string name="expand_options">展開選項</string>
@@ -33,6 +37,8 @@
 
     <string name="pref_category_about">關於</string>
     <string name="pref_source_code">原始碼</string>
+    <string name="pref_translators">翻譯人員</string>
+    <string name="pref_translator_list">abc0922001</string>
 
     <string name="font_family_default">預設</string>
     <string name="default_bold">預設粗體</string>

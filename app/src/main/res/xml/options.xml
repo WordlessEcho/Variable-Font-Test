@@ -169,6 +169,17 @@
                 android:data="@string/project_homepage" />
 
         </Preference>
+
+        <Preference
+            android:key="translators"
+            android:summary="@string/pref_translator_list"
+            android:title="@string/pref_translators"
+            android:icon="@drawable/translate_24px">
+
+            <intent android:action="android.intent.action.VIEW"
+                android:data="@string/project_translators" />
+
+        </Preference>
     </PreferenceCategory>
 
 </PreferenceScreen>

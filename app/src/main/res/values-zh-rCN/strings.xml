@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">可变字体测试器</string>
+    <string name="project_translators" translatable="false">
+        https://github.com/WordlessEcho/Variable-Font-Test/blob/main/TRANSLATORS.md#zh-rCN
+    </string>
+
     <string name="default_preview">（点击此处即可输入任意文字）这句话后来演变成“饮水思源”这个成语，意为喝水的时候想一想流水的源头，比喻不忘本。</string>
     <string name="input_hint_for_preview">输入一些你想看到的文字。</string>
     <string name="expand_options">展开选项</string>
@@ -37,6 +41,7 @@
 
     <string name="pref_category_about">关于</string>
     <string name="pref_source_code">源代码</string>
+    <string name="pref_translators">译者</string>
 
     <string name="font_family_default">默认</string>
     <string name="default_bold">粗体默认</string>
