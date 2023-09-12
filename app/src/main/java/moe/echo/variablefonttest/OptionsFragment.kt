@@ -440,6 +440,11 @@ class OptionsFragment : PreferenceFragmentCompat() {
         }
 
         chws?.apply {
+            summary = String.format(
+                getString(R.string.mojikumi_description),
+                Constants.FEATURE_CHWS
+            )
+
             setOnPreferenceChangeListener { _, _ ->
                 fontFeatureSettings[Constants.FEATURE_CHWS] = if (!isChecked) "1" else "0"
                 previewContent.fontFeatureSettings = fontFeatureSettings.toFeatures()
