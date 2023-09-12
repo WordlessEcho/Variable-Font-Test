@@ -57,6 +57,7 @@
 
         <SeekBarPreference
             android:key="italAxis"
+            android:summary="ital"
             android:title="@string/variation_italic"
             app:min="0"
             android:max="10"
@@ -66,6 +67,7 @@
 
         <SeekBarPreference
             android:key="opszAxis"
+            android:summary="opsz"
             android:title="@string/variation_optical_size"
             app:min="1"
             android:max="1440"
@@ -75,6 +77,7 @@
 
         <SeekBarPreference
             android:key="slntAxis"
+            android:summary="slnt"
             android:title="@string/variation_slant"
             app:min="0"
             android:max="180"
@@ -84,6 +87,7 @@
 
         <SeekBarPreference
             android:key="wdthAxis"
+            android:summary="wdth"
             android:title="@string/variation_width"
             app:min="0"
             android:max="2000"
@@ -93,6 +97,7 @@
 
         <SeekBarPreference
             android:key="wghtAxis"
+            android:summary="wght"
             android:title="@string/variation_weight"
             app:min="1"
             android:max="1000"
