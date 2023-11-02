@@ -33,8 +33,11 @@
     <string name="pref_category_features">Features</string>
     <string name="feature_chws">Contextual Half-width Spacing</string>
     <string name="feature_halt">Alternate Half Widths</string>
+    <string name="feature_frac">Fractions</string>
     <!--  %s will be the name of font feature tag  -->
     <string name="mojikumi_description">%s. A rule of Mojikumi.</string>
+    <!-- The `\` in `\"` is a escape character. It will be displayed as `"` to user. -->
+    <string name="frac_description">Make \"3/4\" display like \"¾\".</string>
     <string name="feature_editor">Edit features</string>
     <string name="add_font_feature">Add font feature</string>
     <string name="edit_feature_text">Text mode</string>

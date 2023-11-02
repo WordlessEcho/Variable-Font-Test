@@ -142,6 +142,13 @@
             android:defaultValue="false"
             android:persistent="false" />
 
+        <SwitchPreferenceCompat
+            android:key="fracFeature"
+            android:title="@string/feature_frac"
+            android:summary="@string/frac_description"
+            android:defaultValue="false"
+            android:persistent="false" />
+
         <EditTextPreference
             android:key="featureEditor"
             android:title="@string/feature_editor"

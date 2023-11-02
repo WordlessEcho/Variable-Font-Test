@@ -17,6 +17,7 @@ object Constants {
     const val PREF_CATEGORY_FONT_FEATURES = "fontFeatures"
     const val FEATURE_CHWS = "chws"
     const val FEATURE_HALT = "halt"
+    const val FEATURE_FRAC = "frac"
 
     const val PREF_CATEGORY_VARIATIONS = "variations"
     const val PREF_UNSUPPORTED_ANDROID = "unsupportedAndroid"
@@ -31,6 +32,7 @@ object Constants {
 
     const val PREF_FEATURE_CHWS = "${FEATURE_CHWS}Feature"
     const val PREF_FEATURE_HALT = "${FEATURE_HALT}Feature"
+    const val PREF_FEATURE_FRAC = "${FEATURE_FRAC}Feature"
     const val PREF_FEATURE_EDITOR = "featureEditor"
     const val PREF_ADD_FONT_FEATURE = "addFeature"
     const val PREF_EDIT_FEATURE = "editFeature"
