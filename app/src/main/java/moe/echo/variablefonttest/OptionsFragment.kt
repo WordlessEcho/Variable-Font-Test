@@ -212,10 +212,6 @@ class OptionsFragment : PreferenceFragmentCompat() {
                 title = tagName
 
                 isPersistent = false
-                // Divide 1 for index
-                // Divide 2 to make new preference appear before
-                // "Add variation / feature" and "Edit variation / feature"
-                order = preferences.preferenceCount - 1 - 2
             }
 
             val duplicateKeyPreference = findPreference<Preference>(tagName)
@@ -223,6 +219,17 @@ class OptionsFragment : PreferenceFragmentCompat() {
                 preferences.removePreference(duplicateKeyPreference)
             }
             preferences.addPreference(preference)
+
+            // Reorganize preferences to make add & edit preference always at bottom
+            preferences.forEach {
+                when (it.key) {
+                    preference.key -> it.order = preferences.preferenceCount - 3
+                    Constants.PREF_ADD_FONT_VARIATION, Constants.PREF_ADD_FONT_FEATURE ->
+                        it.order = preferences.preferenceCount - 2
+                    Constants.PREF_EDIT_VARIATION, Constants.PREF_EDIT_FEATURE ->
+                        it.order = preferences.preferenceCount - 1
+                }
+            }
         }
         setNegativeButton(android.R.string.cancel) { _, _ -> return@setNegativeButton }
     }
