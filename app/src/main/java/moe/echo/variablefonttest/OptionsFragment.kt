@@ -449,6 +449,11 @@ class OptionsFragment : PreferenceFragmentCompat() {
         }
 
         chws?.apply {
+            // `chws` is disabled by default when SDK < 33
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                isChecked = false
+            }
+
             summary = String.format(
                 getString(R.string.mojikumi_description),
                 Constants.FEATURE_CHWS

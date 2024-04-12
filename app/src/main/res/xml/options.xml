@@ -133,7 +133,7 @@
         <SwitchPreferenceCompat
             android:key="chwsFeature"
             android:title="@string/feature_chws"
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:persistent="false" />
 
         <SwitchPreferenceCompat
