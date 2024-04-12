@@ -13,7 +13,6 @@
     <color name="cyan_700">#0097A7</color>
     <color name="pink_A200">#FF4081</color>
     <color name="pink_500">#E91E63</color>
-    <color name="grey_background">#303030</color>
 
-    <color name="preview_content_background">#FFFFFFFF</color>
+    <color name="preview_content_background">@color/white</color>
 </resources>
