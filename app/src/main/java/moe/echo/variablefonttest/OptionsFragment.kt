@@ -261,7 +261,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
         val ttcIndex: EditTextPreference? = findPreference(Constants.PREF_TTC_INDEX)
         val customFont: Preference? = findPreference(Constants.PREF_CUSTOM_FONT)
 
-        val variations = findPreference<PreferenceCategory>(Constants.PREF_CATEGORY_VARIATIONS)
+        val variations: PreferenceCategory? = findPreference(Constants.PREF_CATEGORY_VARIATIONS)
         val ital: SeekBarPreference? = findPreference(Constants.PREF_VARIATION_ITALIC)
         val opsz: SeekBarPreference? = findPreference(Constants.PREF_VARIATION_OPTICAL_SIZE)
         val slnt: SeekBarPreference? = findPreference(Constants.PREF_VARIATION_SLANT)
@@ -271,7 +271,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
         val addVariation: Preference? = findPreference(Constants.PREF_ADD_FONT_VARIATION)
         val editVariation: Preference? = findPreference(Constants.PREF_EDIT_VARIATION)
 
-        val fontFeatures = findPreference<PreferenceCategory>(Constants.PREF_CATEGORY_FONT_FEATURES)
+        val fontFeatures: PreferenceCategory? = findPreference(Constants.PREF_CATEGORY_FONT_FEATURES)
         val chws: SwitchPreferenceCompat? = findPreference(Constants.PREF_FEATURE_CHWS)
         val halt: SwitchPreferenceCompat? = findPreference(Constants.PREF_FEATURE_HALT)
         val frac: SwitchPreferenceCompat? = findPreference(Constants.PREF_FEATURE_FRAC)
