@@ -3,6 +3,8 @@
     <style name="Theme.VariableFontTest" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/cyan_500</item>
+        <!-- https://m2.material.io/develop/android/theming/dark#color-palette -->
+        <item name="colorSurface">@color/cyan_500</item>
         <item name="colorPrimaryVariant">@color/cyan_700</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/pink_A200</item>
