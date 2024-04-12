@@ -11,8 +11,8 @@ android {
         applicationId = "moe.echo.variablefonttest"
         minSdk = 21
         targetSdk = 34
-        versionCode = 17
-        versionName = "3.4"
+        versionCode = 18
+        versionName = "3.5"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
