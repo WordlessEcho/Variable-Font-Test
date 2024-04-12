@@ -402,7 +402,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
 
         variationEditor?.setOnPreferenceChangeListener { _, newValue ->
             try {
-                setVariation(fontVariationSettings.toFeatures())
+                setVariation(newValue.toString())
                 return@setOnPreferenceChangeListener true
             } catch (e: IllegalArgumentException) {
                 Toast.makeText(context, e.message.toString(), Toast.LENGTH_LONG).show()
