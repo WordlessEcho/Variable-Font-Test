@@ -67,7 +67,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    implementation(libs.androidx.appcompat)
+//    implementation(libs.androidx.appcompat)
     implementation(libs.google.material)
     implementation(libs.androidx.preference)
     implementation(libs.rikkax.preference.simplemenu)
