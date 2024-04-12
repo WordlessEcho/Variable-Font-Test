@@ -8,7 +8,7 @@ android {
         applicationId "moe.echo.variablefonttest"
         minSdk 21
         compileSdk 34
-        targetSdk 33
+        targetSdk 34
         versionCode 15
         versionName "3.2"
 
