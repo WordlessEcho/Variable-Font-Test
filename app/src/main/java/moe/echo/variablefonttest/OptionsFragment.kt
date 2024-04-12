@@ -16,7 +16,10 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.core.view.updatePadding
 import androidx.preference.EditTextPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
@@ -275,6 +278,21 @@ class OptionsFragment : PreferenceFragmentCompat() {
         val featureEditor: EditTextPreference? = findPreference(Constants.PREF_FEATURE_EDITOR)
         val addFeature: Preference? = findPreference(Constants.PREF_ADD_FONT_FEATURE)
         val editFeatures: Preference? = findPreference(Constants.PREF_EDIT_FEATURE)
+
+        // https://developer.android.com/develop/ui/views/layout/edge-to-edge
+        // https://medium.com/androiddevelopers/gesture-navigation-handling-gesture-conflicts-8ee9c2665c69#eaaa
+        ViewCompat.setOnApplyWindowInsetsListener(listView) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            // Apply the insets as a margin to the view. This solution sets
+            // only the bottom, left, and right dimensions, but you can apply whichever
+            // insets are appropriate to your layout. You can also update the view padding
+            // if that's more appropriate.
+            v.updatePadding(bottom = insets.bottom)
+
+            // Return CONSUMED if you don't want want the window insets to keep passing
+            // down to descendant views.
+            WindowInsetsCompat.CONSUMED
+        }
 
         fun setVariation(settings: String) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

@@ -1,10 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.VariableFontTest" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.VariableFontTest" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/cyan_500</item>
         <item name="colorPrimaryVariant">@color/cyan_700</item>
-        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/pink_A200</item>
         <item name="colorSecondaryVariant">@color/pink_500</item>
@@ -12,5 +11,6 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 </resources>
