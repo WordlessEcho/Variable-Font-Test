@@ -7,4 +7,4 @@ A Android app allow you input any words and adjust its wght that using system fo
 </a>
 
 # Preview
-![app preview en_v3.5](doc/pics/variable-font-test-en-v3.5.webm)
+![app preview en_v3.5](doc/pics/variable-font-test-en-v3.5.mov)
