@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.VariableFontTest" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
@@ -9,9 +9,8 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/pink_A200</item>
         <item name="colorSecondaryVariant">@color/pink_500</item>
-        <!-- Customize your theme here. -->
-        <!-- https://stackoverflow.com/a/42313556 -->
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
+        <!-- https://developer.android.com/develop/ui/views/layout/edge-to-edge-manually#change-color -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 </resources>

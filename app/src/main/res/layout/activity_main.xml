@@ -1,30 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/topAppBar"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical">
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="?attr/actionBarSize"
-            app:title="@string/app_name"
-            app:titleTextColor="@color/white" />
+            android:fitsSystemWindows="true">
 
-    </com.google.android.material.appbar.AppBarLayout>
+            <com.google.android.material.appbar.MaterialToolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize"
+                app:title="@string/app_name"
+                app:titleTextColor="@color/white" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/preview_container"
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/preview_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:name="moe.echo.variablefonttest.PreviewFragment" />
+    </LinearLayout>
+
+    <!-- https://cs.android.com/android/_/android/platform/frameworks/base/+/refs/tags/android-5.1.1_r38:packages/SystemUI/res/values/colors.xml;l=24;drc=bb4a702e6fe44cb026097db13492f8345b38ee97 -->
+    <View
+        android:id="@+id/status_bar_background"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:name="moe.echo.variablefonttest.PreviewFragment" />
+        android:layout_height="0dp"
+        android:layout_gravity="top"
+        android:background="#66000000" />
 
-</LinearLayout>
+    <!-- https://cs.android.com/android/platform/superproject/+/android-5.1.1_r38:frameworks/base/packages/SystemUI/src/com/android/systemui/statusbar/phone/NavigationBarTransitions.java;l=31;drc=c3056190ae1a6d29ce5943d45ab4711e1e49620c -->
+    <View
+        android:id="@+id/navigation_bar_background"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom"
+        android:background="#66000000" />
+
+</FrameLayout>
