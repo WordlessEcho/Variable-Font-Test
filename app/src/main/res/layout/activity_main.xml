@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:ignore="MergeRootFrame">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +29,8 @@
             android:id="@+id/preview_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:name="moe.echo.variablefonttest.PreviewFragment" />
+            android:name="moe.echo.variablefonttest.MainFragment"
+            tools:layout="@layout/main_fragment" />
     </LinearLayout>
 
     <!-- https://cs.android.com/android/_/android/platform/frameworks/base/+/refs/tags/android-5.1.1_r38:packages/SystemUI/res/values/colors.xml;l=24;drc=bb4a702e6fe44cb026097db13492f8345b38ee97 -->
