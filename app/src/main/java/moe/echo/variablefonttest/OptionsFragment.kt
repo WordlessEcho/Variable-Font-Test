@@ -62,11 +62,10 @@ class OptionsFragment : PreferenceFragmentCompat() {
         preferences: PreferenceCategory,
         setSetting: (tagName: String, value: String) -> Unit
     ) = AlertDialog.Builder(context).apply {
-        val inflater = requireActivity().layoutInflater
         // https://developer.android.com/develop/ui/views/components/dialogs#CustomLayout
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
-        val dialogLayout = inflater.inflate(R.layout.add_preference_dialog, null)
+        val dialogLayout = View.inflate(context, R.layout.add_preference_dialog, null)
 
         val spinner = dialogLayout.findViewById<Spinner>(R.id.tagType)
         val typeValues = resources.getStringArray(R.array.font_feature_type_values)
