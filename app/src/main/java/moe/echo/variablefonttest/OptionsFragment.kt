@@ -253,8 +253,8 @@ class OptionsFragment : PreferenceFragmentCompat() {
         // Pair options and typefaces
         val valueToTypeface = fontFamilyValues.zip(fontFamilyList).toMap()
 
-        val previewContent: EditText =
-            requireParentFragment().requireView().findViewById(R.id.preview_content)
+        val previewContent: EditText? = view.findViewById(R.id.preview_content)
+
         val textSize: EditTextPreference? = findPreference(Constants.PREF_TEXT_SIZE)
         val fontFamilies: SimpleMenuPreference? = findPreference(Constants.PREF_FONT_FAMILIES)
         val ttcIndex: EditTextPreference? = findPreference(Constants.PREF_TTC_INDEX)
@@ -280,13 +280,18 @@ class OptionsFragment : PreferenceFragmentCompat() {
 
         // https://developer.android.com/develop/ui/views/layout/edge-to-edge
         // https://medium.com/androiddevelopers/gesture-navigation-handling-gesture-conflicts-8ee9c2665c69#eaaa
+        listView.clipToPadding = false
         ViewCompat.setOnApplyWindowInsetsListener(listView) { v, windowInsets ->
-            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val systemBarsInsets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val displayCutout = windowInsets.displayCutout
+
             // Apply the insets as a margin to the view. This solution sets
             // only the bottom, left, and right dimensions, but you can apply whichever
             // insets are appropriate to your layout. You can also update the view padding
             // if that's more appropriate.
-            v.updatePadding(bottom = insets.bottom)
+            v.updatePadding(
+                bottom = systemBarsInsets.bottom
+                    .coerceAtLeast(displayCutout?.safeInsetBottom ?: 0))
 
             // Return CONSUMED if you don't want want the window insets to keep passing
             // down to descendant views.
@@ -295,7 +300,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
 
         fun setVariation(settings: String) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                previewContent.fontVariationSettings = settings
+                previewContent?.fontVariationSettings = settings
             }
         }
 
@@ -316,7 +321,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
             }
             setOnPreferenceChangeListener { _, newValue ->
                 if (newValue.toString().toFloatOrNull() != null) {
-                    previewContent.textSize = newValue.toString().toFloat()
+                    previewContent?.textSize = newValue.toString().toFloat()
                     true
                 } else false
             }
@@ -327,7 +332,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
                 valueToTypeface.contains(newValue) -> {
                     customFont?.isVisible = false
                     ttcIndex?.isVisible = false
-                    previewContent.typeface = valueToTypeface[newValue]
+                    previewContent?.typeface = valueToTypeface[newValue]
                     setVariation(fontVariationSettings.toFeatures())
                     true
                 }
@@ -478,7 +483,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
 
             setOnPreferenceChangeListener { _, _ ->
                 fontFeatureSettings[Constants.FEATURE_CHWS] = if (!isChecked) "1" else "0"
-                previewContent.fontFeatureSettings = fontFeatureSettings.toFeatures()
+                previewContent?.fontFeatureSettings = fontFeatureSettings.toFeatures()
                 true
             }
         }
@@ -491,7 +496,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
 
             setOnPreferenceChangeListener { _, _ ->
                 fontFeatureSettings[Constants.FEATURE_HALT] = if (!isChecked) "1" else "0"
-                previewContent.fontFeatureSettings = fontFeatureSettings.toFeatures()
+                previewContent?.fontFeatureSettings = fontFeatureSettings.toFeatures()
                 true
             }
         }
@@ -499,14 +504,14 @@ class OptionsFragment : PreferenceFragmentCompat() {
         frac?.apply {
             setOnPreferenceChangeListener { _, _ ->
                 fontFeatureSettings[Constants.FEATURE_FRAC] = if (!isChecked) "1" else "0"
-                previewContent.fontFeatureSettings = fontFeatureSettings.toFeatures()
+                previewContent?.fontFeatureSettings = fontFeatureSettings.toFeatures()
                 true
             }
         }
 
         featureEditor?.setOnPreferenceChangeListener { _, newValue ->
             try {
-                previewContent.fontFeatureSettings = newValue.toString()
+                previewContent?.fontFeatureSettings = newValue.toString()
                 return@setOnPreferenceChangeListener true
             } catch (e: IllegalArgumentException) {
                 Toast.makeText(context, e.message.toString(), Toast.LENGTH_LONG).show()
@@ -518,7 +523,7 @@ class OptionsFragment : PreferenceFragmentCompat() {
             if (fontFeatures != null) {
                 createAddPreferenceDialog(view.context, fontFeatures) { tagName, value ->
                     fontFeatureSettings[tagName] = value
-                    previewContent.fontFeatureSettings = fontFeatureSettings.toFeatures()
+                    previewContent?.fontFeatureSettings = fontFeatureSettings.toFeatures()
                 }.apply {
                     setTitle(R.string.add_font_feature)
                     show()
