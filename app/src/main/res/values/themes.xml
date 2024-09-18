@@ -3,6 +3,9 @@
     <style name="Theme.VariableFontTest" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/cyan_500</item>
+        <item name="colorPrimaryDark">@color/cyan_700</item>
+        <!-- For transparent caption bar -->
+        <!-- <item name="colorPrimaryDark">@android:color/transparent</item> -->
         <!-- https://m2.material.io/develop/android/theming/dark#color-palette -->
         <item name="colorSurface">@color/cyan_500</item>
         <item name="colorPrimaryVariant">@color/cyan_700</item>

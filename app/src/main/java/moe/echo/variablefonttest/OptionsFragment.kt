@@ -282,16 +282,13 @@ class OptionsFragment : PreferenceFragmentCompat() {
         // https://medium.com/androiddevelopers/gesture-navigation-handling-gesture-conflicts-8ee9c2665c69#eaaa
         listView.clipToPadding = false
         ViewCompat.setOnApplyWindowInsetsListener(listView) { v, windowInsets ->
-            val systemBarsInsets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
-            val displayCutout = windowInsets.displayCutout
+            val insets = WindowInsetsUtil.safeDrawing(windowInsets)
 
             // Apply the insets as a margin to the view. This solution sets
             // only the bottom, left, and right dimensions, but you can apply whichever
             // insets are appropriate to your layout. You can also update the view padding
             // if that's more appropriate.
-            v.updatePadding(
-                bottom = systemBarsInsets.bottom
-                    .coerceAtLeast(displayCutout?.safeInsetBottom ?: 0))
+            v.updatePadding(bottom = insets.bottom)
 
             // Return CONSUMED if you don't want want the window insets to keep passing
             // down to descendant views.
