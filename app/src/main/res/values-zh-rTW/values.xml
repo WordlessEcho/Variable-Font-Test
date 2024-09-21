@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">可變字型測試器</string>
     <string name="project_translators" translatable="false">
         https://github.com/WordlessEcho/Variable-Font-Test/blob/main/TRANSLATORS.md#zh-rTW
@@ -32,8 +32,9 @@
     <string name="feature_chws">調整連續標點的排字間距</string>
     <string name="feature_halt">調整全部標點的排字間距</string>
     <string name="feature_frac">分數</string>
-    <string name="mojikumi_description">%s，排字間距調整中的一種規則。</string>
-    <string name="frac_description">將「3/4」顯示為「¾」。</string>
+    <string name="chws_description">chws，排字間距調整中的一種規則。</string>
+    <string name="halt_description">halt，排字間距調整中的一種規則。</string>
+    <string name="frac_description" tools:ignore="TypographyFractions">frac，將「3/4」顯示為「¾」。</string>
     <string name="feature_editor">編輯特性</string>
     <string name="add_font_feature">新增字型特性</string>
     <string name="edit_feature_text">文字模式</string>

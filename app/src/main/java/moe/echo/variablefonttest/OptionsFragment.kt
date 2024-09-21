@@ -476,11 +476,6 @@ class OptionsFragment : PreferenceFragmentCompat() {
                 isChecked = false
             }
 
-            summary = String.format(
-                getString(R.string.mojikumi_description),
-                Constants.FEATURE_CHWS
-            )
-
             setOnPreferenceChangeListener { _, _ ->
                 fontFeatureSettings[Constants.FEATURE_CHWS] = if (!isChecked) "1" else "0"
                 previewContent?.fontFeatureSettings = fontFeatureSettings.toFeatures()
@@ -489,11 +484,6 @@ class OptionsFragment : PreferenceFragmentCompat() {
         }
 
         halt?.apply {
-            summary = String.format(
-                getString(R.string.mojikumi_description),
-                Constants.FEATURE_HALT
-            )
-
             setOnPreferenceChangeListener { _, _ ->
                 fontFeatureSettings[Constants.FEATURE_HALT] = if (!isChecked) "1" else "0"
                 previewContent?.fontFeatureSettings = fontFeatureSettings.toFeatures()
