@@ -253,7 +253,8 @@ class OptionsFragment : PreferenceFragmentCompat() {
         // Pair options and typefaces
         val valueToTypeface = fontFamilyValues.zip(fontFamilyList).toMap()
 
-        val previewContent: EditText? = view.findViewById(R.id.preview_content)
+        val previewContent: EditText? =
+            requireParentFragment().requireView().findViewById(R.id.preview_content)
 
         val textSize: EditTextPreference? = findPreference(Constants.PREF_TEXT_SIZE)
         val fontFamilies: SimpleMenuPreference? = findPreference(Constants.PREF_FONT_FAMILIES)
@@ -300,6 +301,8 @@ class OptionsFragment : PreferenceFragmentCompat() {
                 previewContent?.fontVariationSettings = settings
             }
         }
+
+        Log.d(TAG, "onViewCreated: prviewContent == null? " + (previewContent == null))
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             variations?.isEnabled = true
