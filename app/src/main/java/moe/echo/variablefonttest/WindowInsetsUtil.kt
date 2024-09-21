@@ -1,6 +1,5 @@
 package moe.echo.variablefonttest
 
-import android.content.res.Resources
 import androidx.core.graphics.Insets
 import androidx.core.view.WindowInsetsCompat
 
@@ -40,27 +39,5 @@ class WindowInsetsUtil {
 
         fun safeContent(windowInsets: WindowInsetsCompat) =
             Insets.max(safeDrawing(windowInsets), safeGestures(windowInsets))
-
-        fun systemBarsMask(resources: Resources, windowInsets: WindowInsetsCompat): Insets {
-            fun isGestureMode(resources: Resources): Boolean {
-                // https://gist.github.com/Thorsten1976/07d61b3f697364e5f1c08ae076641d58
-                val navBarInteractionModeID = resources.getIdentifier(
-                    "config_navBarInteractionMode", "integer", "android")
-
-                if (navBarInteractionModeID <= 0) {
-                    return false
-                }
-
-                val navBarInteractionMode = resources.getInteger(navBarInteractionModeID)
-                return navBarInteractionMode == 2
-            }
-
-            val systemBars = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
-            val navigationBarsInsets = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars())
-
-            return if (isGestureMode(resources)) {
-                Insets.subtract(systemBars, navigationBarsInsets)
-            } else systemBars
-        }
     }
 }

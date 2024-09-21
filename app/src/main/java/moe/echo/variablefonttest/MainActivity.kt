@@ -6,20 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.FragmentContainerView
 import com.google.android.material.appbar.AppBarLayout
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
+        // https://developer.android.com/about/versions/15/behavior-changes-15#custom-background-protection
         ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { _, windowInsets ->
-            val systemBarMaskInsets = WindowInsetsUtil.systemBarsMask(resources, windowInsets)
-            systemBarMaskInsets.apply {
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.tappableElement())
+
+            insets.apply {
                 val topInsetsBackground: View? = findViewById(R.id.top_insets_background)
                 topInsetsBackground?.let {
                     it.layoutParams.height = top
