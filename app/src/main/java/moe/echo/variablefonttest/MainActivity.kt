@@ -1,9 +1,11 @@
 package moe.echo.variablefonttest
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -17,6 +19,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.attributes.layoutInDisplayCutoutMode =
+                WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS
+        }
 
         // https://developer.android.com/about/versions/15/behavior-changes-15#custom-background-protection
         ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { _, windowInsets ->

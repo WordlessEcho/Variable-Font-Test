@@ -13,6 +13,6 @@
         <item name="colorSecondary">@color/pink_A200</item>
         <item name="colorSecondaryVariant">@color/pink_500</item>
 
-        <item name="android:windowLayoutInDisplayCutoutMode" tools:targetApi="27">always</item>
+        <item name="android:windowLayoutInDisplayCutoutMode" tools:targetApi="27">shortEdges</item>
     </style>
 </resources>
